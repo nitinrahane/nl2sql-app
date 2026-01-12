@@ -1,0 +1,6 @@
+@Nl2Sql.Api_HostAddress = http://localhost:5270
+
+GET {{Nl2Sql.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

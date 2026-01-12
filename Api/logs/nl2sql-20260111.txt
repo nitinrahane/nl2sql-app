@@ -1,0 +1,13 @@
+2026-01-11 09:27:11.469 +05:30 [INF] Now listening on: http://localhost:5001
+2026-01-11 09:27:11.497 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-01-11 09:27:11.498 +05:30 [INF] Hosting environment: Development
+2026-01-11 09:27:11.498 +05:30 [INF] Content root path: /Users/nitin/.gemini/antigravity/scratch/nl2sql-app/Api
+2026-01-11 09:27:11.514 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5001/api/DatabaseConfig - null null
+2026-01-11 09:27:11.530 +05:30 [WRN] Failed to determine the https port for redirect.
+2026-01-11 09:27:11.530 +05:30 [INF] CORS policy execution successful.
+2026-01-11 09:27:11.535 +05:30 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api)'
+2026-01-11 09:27:11.541 +05:30 [INF] Route matched with {action = "GetAll", controller = "DatabaseConfig"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Nl2Sql.Core.Entities.DatabaseConfig]]] GetAll() on controller Nl2Sql.Api.Controllers.DatabaseConfigController (Nl2Sql.Api).
+2026-01-11 09:27:11.705 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Nl2Sql.Core.Entities.DatabaseConfig, Nl2Sql.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-01-11 09:27:11.719 +05:30 [INF] Executed action Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api) in 176.1899ms
+2026-01-11 09:27:11.724 +05:30 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api)'
+2026-01-11 09:27:11.726 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5001/api/DatabaseConfig - 200 null application/json; charset=utf-8 212.7647ms

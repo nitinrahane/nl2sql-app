@@ -1,0 +1,28 @@
+# .NET
+bin/
+obj/
+*.user
+*.userosscache
+*.sln.docstates
+.vs/
+.vscode/
+
+# Node.js
+node_modules/
+dist/
+dist-ssr
+*.local
+.eslintcache
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment/Secrets
+.env
+.env.*
+! .env.example
+appsettings.Secrets.json
