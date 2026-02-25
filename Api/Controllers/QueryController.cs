@@ -14,6 +14,7 @@ public class QueryController : ControllerBase
     private readonly ISqlValidationService _validationService;
     private readonly IQueryExecutionService _executionService;
     private readonly IQueryHistoryService _historyService;
+    private readonly ILogger<QueryController> _logger;
 
     public QueryController(
         IAIService aiService, 
@@ -21,7 +22,8 @@ public class QueryController : ControllerBase
         IDatabaseConfigService configService,
         ISqlValidationService validationService,
         IQueryExecutionService executionService,
-        IQueryHistoryService historyService)
+        IQueryHistoryService historyService,
+        ILogger<QueryController> logger)
     {
         _aiService = aiService;
         _schemaService = schemaService;
@@ -29,16 +31,18 @@ public class QueryController : ControllerBase
         _validationService = validationService;
         _executionService = executionService;
         _historyService = historyService;
+        _logger = logger;
     }
 
     [HttpPost("generate")]
     public async Task<ActionResult<AiQueryResponse>> GenerateSql([FromBody] AiQueryRequest request)
     {
+        if (string.IsNullOrWhiteSpace(request.NaturalLanguageQuery))
+            return BadRequest(new { error = "Query text is required" });
+
         var config = await _configService.GetConfigByIdAsync(request.DatabaseConfigId);
         if (config == null)
-        {
-            return NotFound("Database configuration not found");
-        }
+            return NotFound(new { error = "Database configuration not found" });
 
         try
         {
@@ -48,18 +52,16 @@ public class QueryController : ControllerBase
             bool isSuccessful = !response.SqlQuery.StartsWith("ERROR");
             string? validationError = null;
 
-            // Validate the generated SQL
             if (isSuccessful)
             {
                 if (!_validationService.ValidateQuery(response.SqlQuery, config.Type, out validationError))
                 {
                     isSuccessful = false;
                     response.SqlQuery = $"ERROR: Validation failed. {validationError}";
-                    response.Explanation = "The generated query was blocked by security policies.";
+                    response.Explanation = "The generated query was blocked by security policies. Please try rephrasing.";
                 }
             }
 
-            // Save to history
             await _historyService.AddHistoryAsync(new Nl2Sql.Core.Entities.QueryHistory
             {
                 NaturalLanguageQuery = request.NaturalLanguageQuery,
@@ -75,7 +77,8 @@ public class QueryController : ControllerBase
         }
         catch (Exception ex)
         {
-            return StatusCode(500, $"Error generating SQL: {ex.Message}");
+            _logger.LogError(ex, "Error generating SQL for query: {Query}", request.NaturalLanguageQuery);
+            return StatusCode(500, new { error = "Failed to generate SQL. Please try again.", details = ex.Message });
         }
     }
 
@@ -84,15 +87,10 @@ public class QueryController : ControllerBase
     {
         var config = await _configService.GetConfigByIdAsync(request.DatabaseConfigId);
         if (config == null)
-        {
-            return NotFound("Database configuration not found");
-        }
+            return NotFound(new { error = "Database configuration not found" });
 
-        // Double-check validation before execution
         if (!_validationService.ValidateQuery(request.SqlQuery, config.Type, out var validationError))
-        {
-            return BadRequest($"Validation failed: {validationError}");
-        }
+            return BadRequest(new { error = $"Query validation failed: {validationError}" });
 
         try
         {
@@ -101,18 +99,17 @@ public class QueryController : ControllerBase
         }
         catch (Exception ex)
         {
-            return StatusCode(500, $"Error executing query: {ex.Message}");
+            _logger.LogError(ex, "Error executing query: {Query}", request.SqlQuery);
+            return StatusCode(500, new { error = "Failed to execute query.", details = ex.Message });
         }
     }
 
     [HttpPost("suggest")]
-    public async Task<ActionResult<List<string>>> SuggestQuestions([FromBody] int databaseConfigId)
+    public async Task<ActionResult<List<string>>> SuggestQuestions([FromBody] AiQueryRequest request)
     {
-        var config = await _configService.GetConfigByIdAsync(databaseConfigId);
+        var config = await _configService.GetConfigByIdAsync(request.DatabaseConfigId);
         if (config == null)
-        {
-            return NotFound("Database configuration not found");
-        }
+            return NotFound(new { error = "Database configuration not found" });
 
         try
         {
@@ -122,35 +119,22 @@ public class QueryController : ControllerBase
         }
         catch (Exception ex)
         {
-            return StatusCode(500, $"Error generating suggestions: {ex.Message}");
+            _logger.LogError(ex, "Error generating suggestions");
+            return StatusCode(500, new { error = "Failed to generate suggestions.", details = ex.Message });
         }
     }
 
     [HttpGet("history")]
     public async Task<ActionResult<IEnumerable<Nl2Sql.Core.Entities.QueryHistory>>> GetHistory([FromQuery] int limit = 50)
     {
-        try
-        {
-            var history = await _historyService.GetHistoryAsync(limit);
-            return Ok(history);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, $"Error retrieving history: {ex.Message}");
-        }
+        var history = await _historyService.GetHistoryAsync(limit);
+        return Ok(history);
     }
 
     [HttpDelete("history")]
     public async Task<IActionResult> ClearHistory()
     {
-        try
-        {
-            await _historyService.ClearHistoryAsync();
-            return NoContent();
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, $"Error clearing history: {ex.Message}");
-        }
+        await _historyService.ClearHistoryAsync();
+        return NoContent();
     }
 }

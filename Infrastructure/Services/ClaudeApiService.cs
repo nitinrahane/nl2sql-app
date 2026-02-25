@@ -3,6 +3,7 @@ using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Net.Http.Json;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Nl2Sql.Core.Enums;
 using Nl2Sql.Core.Interfaces;
 using Nl2Sql.Core.Models;
@@ -13,325 +14,429 @@ public class ClaudeApiService : IAIService
 {
     private readonly HttpClient _httpClient;
     private readonly string _apiKey;
+    private readonly ILogger<ClaudeApiService> _logger;
     private const string AnthropicApiUrl = "https://api.anthropic.com/v1/messages";
+    private const string DefaultModel = "claude-sonnet-4-20250514";
+    private const int MaxRetries = 2;
 
-    public ClaudeApiService(HttpClient httpClient, IConfiguration configuration)
+    private static readonly JsonSerializerOptions JsonOptions = new()
+    {
+        PropertyNameCaseInsensitive = true,
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+    };
+
+    public ClaudeApiService(HttpClient httpClient, IConfiguration configuration, ILogger<ClaudeApiService> logger)
     {
         _httpClient = httpClient;
+        _logger = logger;
         _apiKey = configuration["Anthropic:ApiKey"] ?? throw new ArgumentNullException("Anthropic:ApiKey configuration is missing");
-        _httpClient.DefaultRequestHeaders.Add("x-api-key", _apiKey); // Set default header
-        _httpClient.DefaultRequestHeaders.Add("anthropic-version", "2023-06-01"); // Set default header
+        _httpClient.DefaultRequestHeaders.Add("x-api-key", _apiKey);
+        _httpClient.DefaultRequestHeaders.Add("anthropic-version", "2023-06-01");
     }
 
     public async Task<AiQueryResponse> GenerateSqlAsync(string naturalLanguageQuery, SchemaInfo schemaInfo, DatabaseType databaseType)
     {
-        // Filter schema to only include relevant tables based on query keywords
         var filteredSchema = FilterRelevantTables(schemaInfo, naturalLanguageQuery);
-        
         var schemaContext = FormatSchema(filteredSchema);
-        Console.WriteLine($"[DEBUG] Schema Context Sent to AI:\n{schemaContext}"); // Log schema for debugging
-
-        var systemPrompt = $@"You are an expert SQL assistant. Your goal is to convert natural language questions into accurate SQL queries for {databaseType}.
         
-Schema:
-{schemaContext}
+        _logger.LogDebug("Schema sent to AI: {TableCount} tables", filteredSchema.Tables.Count);
 
-Examples:
-User: ""Show me the top 5 customers by total order amount in the last year""
-Assistant: {{
-    ""sqlQuery"": ""SELECT TOP 5 cp.FIRST_NAME, cp.LAST_NAME, SUM(oo.TOTAL_AMOUNT) as TotalSpent FROM dbo.CUSTOMER_PROFILE cp JOIN dbo.OnlineOrder oo ON cp.ID = oo.CUSTOMER_ID WHERE oo.ORDER_DATE >= DATEADD(YEAR, -1, GETDATE()) GROUP BY cp.FIRST_NAME, cp.LAST_NAME ORDER BY TotalSpent DESC"",
-    ""explanation"": ""This query joins the customer profile with their online orders, filters for orders in the last year, sums the total amount per customer, and returns the top 5 spenders."",
-    ""visualization"": {{
-        ""chartType"": ""Bar"",
-        ""xAxisColumn"": ""FIRST_NAME"",
-        ""yAxisColumn"": ""TotalSpent"",
-        ""title"": ""Top 5 Customers by Spending (Last Year)""
-    }}
-}}
-
-User: ""How many washes were completed each month this year?""
-Assistant: {{
-    ""sqlQuery"": ""SELECT FORMAT(FINISHED_DATE, 'yyyy-MM') as Month, COUNT(*) as WashCount FROM dbo.OnlineOrder WHERE IS_FINISHED = 1 AND FINISHED_DATE >= DATEFROMPARTS(YEAR(GETDATE()), 1, 1) GROUP BY FORMAT(FINISHED_DATE, 'yyyy-MM') ORDER BY Month"",
-    ""explanation"": ""This query counts the number of finished orders grouped by month for the current year."",
-    ""visualization"": {{
-        ""chartType"": ""Line"",
-        ""xAxisColumn"": ""Month"",
-        ""yAxisColumn"": ""WashCount"",
-        ""title"": ""Monthly Completed Washes (Current Year)""
-    }}
-}}
-
-Rules:
-1. Generate a valid SQL query for {databaseType}.
-2. The query must be a SELECT statement only. No INSERT, UPDATE, DELETE, DROP, etc.
-3. CRITICAL: USE ONLY THE EXACT TABLE AND COLUMN NAMES PROVIDED IN THE SCHEMA ABOVE.
-4. Always use the format TABLE_NAME.COLUMN_NAME when referencing columns to avoid ambiguity.
-5. If a column name is not listed under a specific table in the schema, DO NOT USE IT for that table.
-6. Double-check that every column you use exists in the table you're querying.
-7. **IMPORTANT FOR SQL SERVER**: Use SQL Server syntax:
-   - Use TOP N instead of LIMIT N
-   - Use GETDATE() instead of NOW()
-   - Use DATEADD() for date arithmetic
-   - Use DATEDIFF() for date differences
-   Example: SELECT TOP 10 * FROM Table WHERE Date >= DATEADD(YEAR, -1, GETDATE())
-8. Provide a brief explanation of the query.
-9. Recommend the best visualization for the result (Table, Bar, Line, Pie).
-   - If the result is time-series, suggest 'Line'.
-   - If comparing categories, suggest 'Bar'.
-   - If parts of a whole, suggest 'Pie'.
-   - Otherwise, default to 'Table'.
-   - Identify the X-axis (category/time) and Y-axis (value) columns.
-
-Output Format:
-Return ONLY a JSON object with the following structure:
-{{
-    ""sqlQuery"": ""SELECT ..."",
-    ""explanation"": ""..."",
-    ""visualization"": {{
-        ""chartType"": ""Bar"",
-        ""xAxisColumn"": ""ColumnName"",
-        ""yAxisColumn"": ""ColumnName"",
-        ""title"": ""Chart Title""
-    }}
-}}
-";
+        var dbName = databaseType.ToString();
+        var systemPrompt = BuildSqlGenerationPrompt(schemaContext, dbName, databaseType);
 
         var requestBody = new
         {
-            model = "claude-3-haiku-20240307",
-            max_tokens = 1024,
+            model = DefaultModel,
+            max_tokens = 2048,
             system = systemPrompt,
             messages = new object[]
             {
-                new { role = "user", content = naturalLanguageQuery },
-                new { role = "assistant", content = "{" }
+                new { role = "user", content = naturalLanguageQuery }
             }
         };
 
-        var request = new HttpRequestMessage(HttpMethod.Post, AnthropicApiUrl);
-        request.Content = JsonContent.Create(requestBody);
-        
-        var response = await _httpClient.SendAsync(request);
-        
-        if (!response.IsSuccessStatusCode)
-        {
-            var errorContent = await response.Content.ReadAsStringAsync();
-            throw new HttpRequestException($"Anthropic API Error: {response.StatusCode} - {errorContent}");
-        }
-
-        var responseData = await response.Content.ReadFromJsonAsync<JsonElement>();
-        var contentText = responseData.GetProperty("content")[0].GetProperty("text").GetString();
-        contentText = "{" + contentText; // Prepend the prefilled brace
-
-        try 
-        {
-            // Clean up markdown code blocks if present
-            contentText = contentText.Replace("```json", "").Replace("```", "").Trim();
-            
-            // Extract JSON object if surrounded by text
-            int startIndex = contentText.IndexOf('{');
-            int endIndex = contentText.LastIndexOf('}');
-            if (startIndex >= 0 && endIndex > startIndex)
-            {
-                contentText = contentText.Substring(startIndex, endIndex - startIndex + 1);
-            }
-
-            // Sanitize: Replace unescaped newlines with spaces to prevent JSON parsing errors
-            // This is a simple heuristic; for more complex cases, a proper parser might be needed.
-            // We replace newlines that are likely inside the SQL string.
-            contentText = contentText.Replace("\r\n", " ").Replace("\n", " ").Replace("\r", " ");
-
-            var result = JsonSerializer.Deserialize<AiQueryResponse>(contentText, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-            
-            if (result != null)
-            {
-                result.SqlQuery = ConvertDialect(result.SqlQuery, databaseType);
-            }
-
-            return result ?? new AiQueryResponse { SqlQuery = "ERROR", Explanation = "Failed to parse AI response." };
-        }
-        catch (Exception ex)
-        {
-             return new AiQueryResponse { SqlQuery = "ERROR", Explanation = $"Failed to parse AI response JSON. Raw: {contentText}. Error: {ex.Message}" };
-        }
+        var responseText = await CallAnthropicApiWithRetry(requestBody);
+        return ParseSqlResponse(responseText, databaseType);
     }
 
     public async Task<List<string>> GenerateSuggestionsAsync(SchemaInfo schemaInfo, DatabaseType dbType)
     {
         var schemaContext = FormatSchema(schemaInfo);
-        var systemPrompt = $@"You are a data analyst. Based on the database schema below, suggest 3 interesting questions that a user might ask to explore the data.
+        var systemPrompt = $@"You are a data analyst helping a non-technical user explore their database. Based on the schema below, suggest 5 diverse, practical questions that would reveal useful business insights.
 
 Schema:
 {schemaContext}
 
-Output Format:
-Return ONLY a JSON array of strings:
-[""Question 1?"", ""Question 2?"", ""Question 3?""]
-";
+Guidelines:
+- Questions should range from simple (counts, lists) to analytical (trends, comparisons, aggregations)
+- Use natural, conversational language a non-technical person would use
+- Focus on questions that would produce interesting visualizable results
+- Include at least one time-based question if date columns exist
+- Include at least one comparison/ranking question
+
+Return ONLY a JSON array of strings, no other text:
+[""Question 1?"", ""Question 2?"", ""Question 3?"", ""Question 4?"", ""Question 5?""]";
 
         var requestBody = new
         {
-            model = "claude-3-haiku-20240307",
+            model = DefaultModel,
             max_tokens = 512,
             system = systemPrompt,
             messages = new object[]
             {
-                new { role = "user", content = "Suggest 3 questions." },
-                new { role = "assistant", content = "[" }
+                new { role = "user", content = "Suggest 5 insightful questions for this database." }
             }
         };
 
-        var request = new HttpRequestMessage(HttpMethod.Post, AnthropicApiUrl);
-        request.Content = JsonContent.Create(requestBody);
+        var responseText = await CallAnthropicApiWithRetry(requestBody);
+        return ParseSuggestionsResponse(responseText);
+    }
 
-        var response = await _httpClient.SendAsync(request);
-        
-        if (!response.IsSuccessStatusCode)
+    private string BuildSqlGenerationPrompt(string schemaContext, string dbName, DatabaseType databaseType)
+    {
+        var dialectNotes = databaseType switch
         {
-            var errorContent = await response.Content.ReadAsStringAsync();
-            throw new HttpRequestException($"Anthropic API Error: {response.StatusCode} - {errorContent}");
+            DatabaseType.SqlServer => @"
+SQL Server specific syntax:
+- Use TOP N instead of LIMIT N
+- Use GETDATE() instead of NOW()
+- Use DATEADD()/DATEDIFF() for date arithmetic
+- Use FORMAT() for date formatting
+- Use ISNULL() instead of COALESCE() for simple cases
+- Use square brackets [name] for reserved words
+Example: SELECT TOP 10 * FROM [Order] WHERE OrderDate >= DATEADD(YEAR, -1, GETDATE())",
+
+            DatabaseType.PostgreSql => @"
+PostgreSQL specific syntax:
+- Use LIMIT N for row limiting
+- Use NOW() or CURRENT_TIMESTAMP for current time
+- Use :: for type casting (e.g., '2024-01-01'::date)
+- Use EXTRACT(YEAR FROM date) for date parts
+- Use double quotes ""name"" for reserved words
+Example: SELECT * FROM orders WHERE order_date >= NOW() - INTERVAL '1 year' LIMIT 10",
+
+            DatabaseType.MySql => @"
+MySQL specific syntax:
+- Use LIMIT N for row limiting
+- Use NOW() or CURDATE() for current time
+- Use DATE_SUB()/DATE_ADD() for date arithmetic
+- Use backticks `name` for reserved words
+Example: SELECT * FROM orders WHERE order_date >= DATE_SUB(NOW(), INTERVAL 1 YEAR) LIMIT 10",
+
+            _ => ""
+        };
+
+        return $@"You are an expert SQL assistant that converts natural language to SQL. You help non-technical users query their databases.
+
+DATABASE SCHEMA:
+{schemaContext}
+
+TARGET DATABASE: {dbName}
+{dialectNotes}
+
+RULES:
+1. Generate ONLY SELECT statements. Never use INSERT, UPDATE, DELETE, DROP, ALTER, TRUNCATE, CREATE, GRANT, REVOKE, EXEC, or EXECUTE.
+2. CRITICAL: Use ONLY exact table and column names from the schema above. Do NOT invent columns.
+3. Always qualify column names with table name/alias to avoid ambiguity.
+4. Use appropriate JOINs when data spans multiple tables. Leverage the foreign key relationships shown in the schema.
+5. Add reasonable defaults: LIMIT/TOP 100 if no limit specified, ORDER BY for ranked results.
+6. Handle NULLs gracefully in aggregations.
+7. For date-related questions, use the correct date functions for {dbName}.
+8. Provide a clear, concise explanation of what the query does, written for a non-technical user.
+9. Recommend the best visualization:
+   - ""Bar"" for category comparisons
+   - ""Line"" for time series / trends
+   - ""Pie"" for parts-of-whole / proportions (limit to ≤10 slices)
+   - ""Area"" for cumulative trends
+   - ""Table"" when data is too complex or has many columns
+
+OUTPUT FORMAT — return ONLY this JSON, no other text:
+{{
+    ""sqlQuery"": ""SELECT ..."",
+    ""explanation"": ""Plain English explanation"",
+    ""visualization"": {{
+        ""chartType"": ""Bar|Line|Pie|Area|Table"",
+        ""xAxisColumn"": ""column_name"",
+        ""yAxisColumns"": [""column_name""],
+        ""title"": ""Descriptive Chart Title""
+    }}
+}}";
+    }
+
+    private async Task<string> CallAnthropicApiWithRetry(object requestBody)
+    {
+        Exception? lastException = null;
+
+        for (int attempt = 0; attempt <= MaxRetries; attempt++)
+        {
+            try
+            {
+                var request = new HttpRequestMessage(HttpMethod.Post, AnthropicApiUrl);
+                request.Content = JsonContent.Create(requestBody);
+
+                var response = await _httpClient.SendAsync(request);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    var errorContent = await response.Content.ReadAsStringAsync();
+                    
+                    if ((int)response.StatusCode == 429 || (int)response.StatusCode >= 500)
+                    {
+                        _logger.LogWarning("Anthropic API returned {StatusCode}, attempt {Attempt}/{MaxRetries}", 
+                            response.StatusCode, attempt + 1, MaxRetries + 1);
+                        
+                        if (attempt < MaxRetries)
+                        {
+                            await Task.Delay(TimeSpan.FromSeconds(Math.Pow(2, attempt + 1)));
+                            continue;
+                        }
+                    }
+                    
+                    throw new HttpRequestException($"Anthropic API Error: {response.StatusCode} - {errorContent}");
+                }
+
+                var responseData = await response.Content.ReadFromJsonAsync<JsonElement>();
+                return responseData.GetProperty("content")[0].GetProperty("text").GetString() ?? string.Empty;
+            }
+            catch (HttpRequestException ex)
+            {
+                lastException = ex;
+                if (attempt < MaxRetries)
+                {
+                    await Task.Delay(TimeSpan.FromSeconds(Math.Pow(2, attempt + 1)));
+                    continue;
+                }
+            }
         }
 
-        var responseData = await response.Content.ReadFromJsonAsync<JsonElement>();
-        var contentText = responseData.GetProperty("content")[0].GetProperty("text").GetString();
-        contentText = "[" + contentText; // Prepend the prefilled bracket
+        throw lastException ?? new HttpRequestException("Failed to call Anthropic API after retries");
+    }
 
+    private AiQueryResponse ParseSqlResponse(string responseText, DatabaseType databaseType)
+    {
         try
         {
-            contentText = contentText.Replace("```json", "").Replace("```", "").Trim();
+            var cleaned = CleanJsonResponse(responseText);
+            
+            using var doc = JsonDocument.Parse(cleaned);
+            var root = doc.RootElement;
 
-            // Extract JSON array if surrounded by text
-            int startIndex = contentText.IndexOf('[');
-            int endIndex = contentText.LastIndexOf(']');
-            if (startIndex >= 0 && endIndex > startIndex)
+            var sqlQuery = root.GetProperty("sqlQuery").GetString() ?? "ERROR";
+            var explanation = root.GetProperty("explanation").GetString() ?? "";
+
+            var viz = new VisualizationRecommendation();
+            if (root.TryGetProperty("visualization", out var vizEl))
             {
-                contentText = contentText.Substring(startIndex, endIndex - startIndex + 1);
+                viz.ChartType = vizEl.TryGetProperty("chartType", out var ct) ? ct.GetString() ?? "Table" : "Table";
+                viz.XAxisColumn = vizEl.TryGetProperty("xAxisColumn", out var xa) ? xa.GetString() ?? "" : "";
+                viz.Title = vizEl.TryGetProperty("title", out var t) ? t.GetString() ?? "" : "";
+
+                if (vizEl.TryGetProperty("yAxisColumns", out var yc))
+                {
+                    if (yc.ValueKind == JsonValueKind.Array)
+                    {
+                        viz.YAxisColumns = yc.EnumerateArray().Select(e => e.GetString() ?? "").Where(s => s != "").ToList();
+                    }
+                    else if (yc.ValueKind == JsonValueKind.String)
+                    {
+                        var val = yc.GetString();
+                        viz.YAxisColumns = string.IsNullOrEmpty(val) ? new List<string>() : new List<string> { val };
+                    }
+                }
+                else if (vizEl.TryGetProperty("yAxisColumn", out var ycSingle))
+                {
+                    if (ycSingle.ValueKind == JsonValueKind.Array)
+                    {
+                        viz.YAxisColumns = ycSingle.EnumerateArray().Select(e => e.GetString() ?? "").Where(s => s != "").ToList();
+                    }
+                    else if (ycSingle.ValueKind == JsonValueKind.String)
+                    {
+                        var val = ycSingle.GetString();
+                        viz.YAxisColumns = string.IsNullOrEmpty(val) ? new List<string>() : new List<string> { val };
+                    }
+                }
             }
 
-            var suggestions = JsonSerializer.Deserialize<List<string>>(contentText);
+            sqlQuery = ConvertDialect(sqlQuery, databaseType);
+
+            return new AiQueryResponse
+            {
+                SqlQuery = sqlQuery,
+                Explanation = explanation,
+                Visualization = viz
+            };
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to parse AI response: {Response}", responseText);
+            return new AiQueryResponse
+            {
+                SqlQuery = "ERROR",
+                Explanation = $"Failed to parse AI response. Please try rephrasing your question."
+            };
+        }
+    }
+
+    private List<string> ParseSuggestionsResponse(string responseText)
+    {
+        try
+        {
+            var cleaned = CleanJsonResponse(responseText);
+            
+            int startIndex = cleaned.IndexOf('[');
+            int endIndex = cleaned.LastIndexOf(']');
+            if (startIndex >= 0 && endIndex > startIndex)
+            {
+                cleaned = cleaned.Substring(startIndex, endIndex - startIndex + 1);
+            }
+
+            var suggestions = JsonSerializer.Deserialize<List<string>>(cleaned, JsonOptions);
             return suggestions ?? new List<string>();
         }
         catch (Exception ex)
         {
-            return new List<string> { $"Failed to generate suggestions. Raw: {contentText}. Error: {ex.Message}" };
+            _logger.LogError(ex, "Failed to parse suggestions response");
+            return new List<string> { "Show me all tables and their row counts", "What are the most recent records?", "Show me a summary of the data" };
         }
+    }
+
+    private static string CleanJsonResponse(string text)
+    {
+        text = text.Replace("```json", "").Replace("```", "").Trim();
+        
+        int startIndex = text.IndexOf('{');
+        int endIndex = text.LastIndexOf('}');
+        if (startIndex >= 0 && endIndex > startIndex)
+        {
+            text = text.Substring(startIndex, endIndex - startIndex + 1);
+        }
+        
+        return text;
     }
 
     private SchemaInfo FilterRelevantTables(SchemaInfo schemaInfo, string naturalLanguageQuery)
     {
-        // Extract keywords from the query (convert to uppercase for matching)
-        var queryUpper = naturalLanguageQuery.ToUpper();
-        var keywords = queryUpper.Split(new[] { ' ', ',', '.', '?', '!', '(', ')', '[', ']', '{', '}' }, StringSplitOptions.RemoveEmptyEntries)
-            .Where(k => k.Length > 2) // Ignore very short words
+        var queryLower = naturalLanguageQuery.ToLower();
+        var keywords = queryLower
+            .Split(new[] { ' ', ',', '.', '?', '!', '(', ')', '[', ']', '{', '}', '\'', '"' }, StringSplitOptions.RemoveEmptyEntries)
+            .Where(k => k.Length > 2)
+            .Where(k => !StopWords.Contains(k))
             .ToList();
         
-        // Filter tables based on keyword matching (table name or column names)
-        var relevantTables = schemaInfo.Tables.Where(table =>
+        var scoredTables = schemaInfo.Tables.Select(table =>
         {
-            var tableNameUpper = table.Name.ToUpper();
-            
-            // 1. Check table name
-            if (keywords.Any(keyword => 
-                tableNameUpper.Contains(keyword) || 
-                keyword.Contains(tableNameUpper)))
+            int score = 0;
+            var tableNameLower = table.Name.ToLower();
+            var tableNameParts = SplitIdentifier(tableNameLower);
+
+            foreach (var keyword in keywords)
             {
-                return true;
+                if (tableNameLower.Contains(keyword) || keyword.Contains(tableNameLower))
+                    score += 10;
+                
+                if (tableNameParts.Any(part => part.Contains(keyword) || keyword.Contains(part)))
+                    score += 5;
+
+                foreach (var col in table.Columns)
+                {
+                    var colNameLower = col.Name.ToLower();
+                    if (colNameLower.Contains(keyword) || keyword.Contains(colNameLower))
+                        score += 3;
+                }
             }
 
-            // 2. Check column names
-            if (table.Columns.Any(col => 
-                keywords.Any(keyword => 
-                    col.Name.ToUpper().Contains(keyword) || 
-                    keyword.Contains(col.Name.ToUpper()))))
+            if (table.ForeignKeys.Any())
             {
-                return true;
+                foreach (var fk in table.ForeignKeys)
+                {
+                    var refTableLower = fk.ReferencedTable.ToLower();
+                    if (keywords.Any(k => refTableLower.Contains(k)))
+                        score += 2;
+                }
             }
 
-            return false;
-        }).ToList();
-        
-        // If no tables match, return top 20 most likely tables (to avoid empty schema)
-        if (!relevantTables.Any())
+            return (table, score);
+        })
+        .OrderByDescending(x => x.score)
+        .ToList();
+
+        var relevantTables = scoredTables.Where(x => x.score > 0).Select(x => x.table).ToList();
+
+        if (relevantTables.Count > 0)
         {
-            relevantTables = schemaInfo.Tables.Take(20).ToList();
+            var additionalTables = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (var table in relevantTables.ToList())
+            {
+                foreach (var fk in table.ForeignKeys)
+                {
+                    additionalTables.Add(fk.ReferencedTable);
+                }
+            }
+
+            foreach (var addTable in additionalTables)
+            {
+                if (!relevantTables.Any(t => t.Name.Equals(addTable, StringComparison.OrdinalIgnoreCase)))
+                {
+                    var related = schemaInfo.Tables.FirstOrDefault(t => t.Name.Equals(addTable, StringComparison.OrdinalIgnoreCase));
+                    if (related != null)
+                        relevantTables.Add(related);
+                }
+            }
         }
-        // If too many tables match, limit to top 40 (increased from 30 for better coverage)
-        else if (relevantTables.Count > 40)
+
+        if (relevantTables.Count == 0)
         {
-            relevantTables = relevantTables.Take(40).ToList();
+            relevantTables = schemaInfo.Tables.Take(25).ToList();
+        }
+        else if (relevantTables.Count > 50)
+        {
+            relevantTables = relevantTables.Take(50).ToList();
         }
         
-        return new SchemaInfo { Tables = relevantTables };
+        return new SchemaInfo { Tables = relevantTables, TotalTableCount = schemaInfo.TotalTableCount };
+    }
+
+    private static List<string> SplitIdentifier(string name)
+    {
+        var parts = new List<string>();
+        parts.AddRange(name.Split('_', '-').Where(p => p.Length > 0));
+        parts.AddRange(Regex.Split(name, @"(?<=[a-z])(?=[A-Z])").Where(p => p.Length > 0));
+        return parts.Select(p => p.ToLower()).Distinct().ToList();
     }
 
     private string FormatSchema(SchemaInfo schemaInfo)
     {
-        var schemaDescription = new StringBuilder();
-        schemaDescription.AppendLine("DATABASE SCHEMA:");
-        schemaDescription.AppendLine("================");
-        schemaDescription.AppendLine();
+        var sb = new StringBuilder();
         
         foreach (var table in schemaInfo.Tables)
         {
-            schemaDescription.AppendLine($"TABLE: {table.Schema}.{table.Name}");
-            schemaDescription.AppendLine("COLUMNS:");
+            sb.AppendLine($"TABLE: {table.Schema}.{table.Name}");
+            sb.AppendLine("  COLUMNS:");
             foreach (var col in table.Columns)
             {
+                var pk = col.IsPrimaryKey ? " [PK]" : "";
                 var nullable = col.IsNullable ? "NULL" : "NOT NULL";
-                schemaDescription.AppendLine($"  - {col.Name} ({col.DataType}, {nullable})");
+                sb.AppendLine($"    - {col.Name} ({col.DataType}, {nullable}){pk}");
             }
-            schemaDescription.AppendLine(); // Empty line between tables
-        }
-        return schemaDescription.ToString();
-    }
-
-    private AiQueryResponse ParseResponse(string? responseText)
-    {
-        if (string.IsNullOrEmpty(responseText))
-        {
-            return new AiQueryResponse { SqlQuery = "ERROR: Empty response from AI" };
-        }
-
-        var lines = responseText.Split('\n');
-        var sql = "";
-        var explanation = "";
-        var isSql = false;
-        var isExplanation = false;
-
-        foreach (var line in lines)
-        {
-            if (line.StartsWith("SQL Query:"))
+            
+            if (table.ForeignKeys.Any())
             {
-                isSql = true;
-                isExplanation = false;
-                sql += line.Replace("SQL Query:", "").Trim() + " ";
+                sb.AppendLine("  FOREIGN KEYS:");
+                foreach (var fk in table.ForeignKeys)
+                {
+                    sb.AppendLine($"    - {fk.Column} → {fk.ReferencedTable}.{fk.ReferencedColumn}");
+                }
             }
-            else if (line.StartsWith("Explanation:"))
-            {
-                isSql = false;
-                isExplanation = true;
-                explanation += line.Replace("Explanation:", "").Trim() + " ";
-            }
-            else
-            {
-                if (isSql) sql += line.Trim() + " ";
-                if (isExplanation) explanation += line.Trim() + " ";
-            }
+            sb.AppendLine();
         }
-
-        return new AiQueryResponse
-        {
-            SqlQuery = sql.Trim(),
-            Explanation = explanation.Trim()
-        };
+        
+        return sb.ToString();
     }
 
     private string ConvertDialect(string sql, DatabaseType databaseType)
     {
         if (databaseType == DatabaseType.SqlServer)
         {
-            // 1. Convert LIMIT N OFFSET M to OFFSET M ROWS FETCH NEXT N ROWS ONLY
-            // Or simple LIMIT N to TOP N
             var limitOffsetMatch = Regex.Match(sql, @"LIMIT\s+(\d+)\s+OFFSET\s+(\d+)", RegexOptions.IgnoreCase);
             if (limitOffsetMatch.Success)
             {
@@ -352,43 +457,21 @@ Return ONLY a JSON array of strings:
                     }
                 }
             }
-            
-            // 2. Convert common functions
+
             sql = Regex.Replace(sql, @"\bNOW\(\)", "GETDATE()", RegexOptions.IgnoreCase);
             sql = Regex.Replace(sql, @"\bIFNULL\(", "ISNULL(", RegexOptions.IgnoreCase);
-            sql = Regex.Replace(sql, @"\bSUBSTR\(", "SUBSTRING(", RegexOptions.IgnoreCase);
-            
-            // 3. Convert EXTRACT(YEAR FROM x) to YEAR(x)
             sql = Regex.Replace(sql, @"EXTRACT\((YEAR|MONTH|DAY)\s+FROM\s+([^)]+)\)", "$1($2)", RegexOptions.IgnoreCase);
-            
-            // 4. Convert CONCAT(a, b, ...) to (a + b + ...)
-            // This is complex for arbitrary arguments, but we can handle simple cases
-            var concatMatch = Regex.Match(sql, @"CONCAT\(([^)]+)\)", RegexOptions.IgnoreCase);
-            if (concatMatch.Success)
-            {
-                var args = concatMatch.Groups[1].Value.Split(',').Select(a => a.Trim());
-                var replacement = "(" + string.Join(" + ", args) + ")";
-                sql = sql.Replace(concatMatch.Value, replacement);
-            }
-
-            // 5. Convert backticks to square brackets
-            sql = sql.Replace("`", "[");
-            var parts = sql.Split('`');
-            if (parts.Length > 1)
-            {
-                var sb = new StringBuilder();
-                for (int i = 0; i < parts.Length; i++)
-                {
-                    sb.Append(parts[i]);
-                    if (i < parts.Length - 1)
-                    {
-                        sb.Append(i % 2 == 0 ? "[" : "]");
-                    }
-                }
-                sql = sb.ToString();
-            }
         }
         return sql;
     }
-}
 
+    private static readonly HashSet<string> StopWords = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "the", "and", "for", "are", "but", "not", "you", "all", "can", "had",
+        "her", "was", "one", "our", "out", "has", "have", "from", "been", "some",
+        "them", "than", "its", "over", "also", "that", "with", "this", "will",
+        "each", "make", "like", "long", "look", "many", "most", "only", "come",
+        "show", "give", "get", "what", "which", "how", "who", "where", "when",
+        "much", "more", "list", "find", "display", "tell", "about"
+    };
+}

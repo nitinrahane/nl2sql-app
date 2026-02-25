@@ -10,6 +10,7 @@ public class QueryExecutionService : IQueryExecutionService
 {
     private readonly IDatabaseConnectionFactory _connectionFactory;
     private const int DefaultTimeoutSeconds = 30;
+    private const int MaxRowCount = 10000;
 
     public QueryExecutionService(IDatabaseConnectionFactory connectionFactory)
     {
@@ -22,27 +23,30 @@ public class QueryExecutionService : IQueryExecutionService
         
         var stopwatch = Stopwatch.StartNew();
         
-        // Use Dapper to execute the query and map to dynamic
         var data = await connection.QueryAsync<dynamic>(query, commandTimeout: DefaultTimeoutSeconds);
         
         stopwatch.Stop();
 
-        var dataList = data.ToList();
+        var dataList = data.Take(MaxRowCount).ToList();
         var columns = new List<string>();
 
         if (dataList.Any())
         {
-            // Extract column names from the first row (which is an IDictionary<string, object>)
             var firstRow = (IDictionary<string, object>)dataList.First();
             columns = firstRow.Keys.ToList();
         }
+
+        var totalCount = data.Count();
+        var isTruncated = totalCount > MaxRowCount;
 
         return new QueryResult
         {
             Data = dataList,
             RowCount = dataList.Count,
             ExecutionTimeMs = stopwatch.ElapsedMilliseconds,
-            Columns = columns
+            Columns = columns,
+            TotalRowCount = totalCount,
+            IsTruncated = isTruncated
         };
     }
 }

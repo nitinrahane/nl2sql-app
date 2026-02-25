@@ -1,5 +1,3 @@
-using Nl2Sql.Core.Enums;
-
 namespace Nl2Sql.Core.Models;
 
 public class AiQueryRequest
@@ -13,4 +11,17 @@ public class AiQueryResponse
     public string SqlQuery { get; set; } = string.Empty;
     public string Explanation { get; set; } = string.Empty;
     public VisualizationRecommendation Visualization { get; set; } = new();
+}
+
+public class TestConnectionRequest
+{
+    public int Type { get; set; }
+    public string ConnectionString { get; set; } = string.Empty;
+}
+
+public class TestConnectionResponse
+{
+    public bool Success { get; set; }
+    public string Message { get; set; } = string.Empty;
+    public int? TableCount { get; set; }
 }

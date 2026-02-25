@@ -1,0 +1,73 @@
+2026-02-25 19:12:55.828 +00:00 [INF] Now listening on: http://localhost:5001
+2026-02-25 19:12:55.851 +00:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-02-25 19:12:55.851 +00:00 [INF] Hosting environment: Development
+2026-02-25 19:12:55.851 +00:00 [INF] Content root path: /workspace/Api
+2026-02-25 19:13:05.458 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5001/swagger/v1/swagger.json - null null
+2026-02-25 19:13:05.579 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5001/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 121.34ms
+2026-02-25 19:13:30.394 +00:00 [INF] Request starting HTTP/1.1 POST http://localhost:5001/api/DatabaseConfig - application/json 111
+2026-02-25 19:13:30.406 +00:00 [WRN] Failed to determine the https port for redirect.
+2026-02-25 19:13:30.417 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.DatabaseConfigController.Create (Nl2Sql.Api)'
+2026-02-25 19:13:30.439 +00:00 [INF] Route matched with {action = "Create", controller = "DatabaseConfig"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Nl2Sql.Core.Entities.DatabaseConfig]] Create(Nl2Sql.Core.Entities.DatabaseConfig) on controller Nl2Sql.Api.Controllers.DatabaseConfigController (Nl2Sql.Api).
+2026-02-25 19:13:30.814 +00:00 [INF] Saved 1 entities to in-memory store.
+2026-02-25 19:13:30.822 +00:00 [INF] Executing CreatedAtActionResult, writing value of type 'Nl2Sql.Core.Entities.DatabaseConfig'.
+2026-02-25 19:13:30.837 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.DatabaseConfigController.Create (Nl2Sql.Api) in 395.1532ms
+2026-02-25 19:13:30.837 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.DatabaseConfigController.Create (Nl2Sql.Api)'
+2026-02-25 19:13:30.839 +00:00 [INF] Request finished HTTP/1.1 POST http://localhost:5001/api/DatabaseConfig - 201 null application/json; charset=utf-8 445.6706ms
+2026-02-25 19:13:34.441 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5001/api/DatabaseConfig - null null
+2026-02-25 19:13:34.444 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api)'
+2026-02-25 19:13:34.450 +00:00 [INF] Route matched with {action = "GetAll", controller = "DatabaseConfig"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Nl2Sql.Core.Entities.DatabaseConfig]]] GetAll() on controller Nl2Sql.Api.Controllers.DatabaseConfigController (Nl2Sql.Api).
+2026-02-25 19:13:34.549 +00:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Nl2Sql.Core.Entities.DatabaseConfig, Nl2Sql.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-02-25 19:13:34.552 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api) in 102.1153ms
+2026-02-25 19:13:34.552 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api)'
+2026-02-25 19:13:34.553 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5001/api/DatabaseConfig - 200 null application/json; charset=utf-8 111.3341ms
+2026-02-25 19:13:35.408 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5001/api/Query/history?limit=10 - null null
+2026-02-25 19:13:35.409 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.QueryController.GetHistory (Nl2Sql.Api)'
+2026-02-25 19:13:35.415 +00:00 [INF] Route matched with {action = "GetHistory", controller = "Query"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Nl2Sql.Core.Entities.QueryHistory]]] GetHistory(Int32) on controller Nl2Sql.Api.Controllers.QueryController (Nl2Sql.Api).
+2026-02-25 19:13:35.487 +00:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Nl2Sql.Core.Entities.QueryHistory, Nl2Sql.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-02-25 19:13:35.490 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.QueryController.GetHistory (Nl2Sql.Api) in 75.0536ms
+2026-02-25 19:13:35.490 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.QueryController.GetHistory (Nl2Sql.Api)'
+2026-02-25 19:13:35.491 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5001/api/Query/history?limit=10 - 200 null application/json; charset=utf-8 82.1796ms
+2026-02-25 19:14:17.861 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5001/api/DatabaseConfig - null null
+2026-02-25 19:14:17.866 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:14:17.867 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api)'
+2026-02-25 19:14:17.868 +00:00 [INF] Route matched with {action = "GetAll", controller = "DatabaseConfig"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Nl2Sql.Core.Entities.DatabaseConfig]]] GetAll() on controller Nl2Sql.Api.Controllers.DatabaseConfigController (Nl2Sql.Api).
+2026-02-25 19:14:17.872 +00:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Nl2Sql.Core.Entities.DatabaseConfig, Nl2Sql.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-02-25 19:14:17.873 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api) in 5.4734ms
+2026-02-25 19:14:17.874 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api)'
+2026-02-25 19:14:17.874 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5001/api/DatabaseConfig - 200 null application/json; charset=utf-8 12.3464ms
+2026-02-25 19:14:24.761 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5001/api/DatabaseConfig - null null
+2026-02-25 19:14:24.762 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:14:24.762 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api)'
+2026-02-25 19:14:24.762 +00:00 [INF] Route matched with {action = "GetAll", controller = "DatabaseConfig"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Nl2Sql.Core.Entities.DatabaseConfig]]] GetAll() on controller Nl2Sql.Api.Controllers.DatabaseConfigController (Nl2Sql.Api).
+2026-02-25 19:14:24.763 +00:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Nl2Sql.Core.Entities.DatabaseConfig, Nl2Sql.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-02-25 19:14:24.763 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api) in 1.1345ms
+2026-02-25 19:14:24.763 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api)'
+2026-02-25 19:14:24.763 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5001/api/DatabaseConfig - 200 null application/json; charset=utf-8 1.9647ms
+2026-02-25 19:15:43.163 +00:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5001/api/DatabaseConfig - null null
+2026-02-25 19:15:43.163 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:15:43.164 +00:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5001/api/DatabaseConfig - 204 null null 1.4753ms
+2026-02-25 19:15:43.165 +00:00 [INF] Request starting HTTP/1.1 POST http://localhost:5001/api/DatabaseConfig - application/json 109
+2026-02-25 19:15:43.165 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:15:43.165 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.DatabaseConfigController.Create (Nl2Sql.Api)'
+2026-02-25 19:15:43.166 +00:00 [INF] Route matched with {action = "Create", controller = "DatabaseConfig"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Nl2Sql.Core.Entities.DatabaseConfig]] Create(Nl2Sql.Core.Entities.DatabaseConfig) on controller Nl2Sql.Api.Controllers.DatabaseConfigController (Nl2Sql.Api).
+2026-02-25 19:15:43.169 +00:00 [INF] Saved 1 entities to in-memory store.
+2026-02-25 19:15:43.170 +00:00 [INF] Executing CreatedAtActionResult, writing value of type 'Nl2Sql.Core.Entities.DatabaseConfig'.
+2026-02-25 19:15:43.170 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.DatabaseConfigController.Create (Nl2Sql.Api) in 4.6232ms
+2026-02-25 19:15:43.172 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.DatabaseConfigController.Create (Nl2Sql.Api)'
+2026-02-25 19:15:43.172 +00:00 [INF] Request finished HTTP/1.1 POST http://localhost:5001/api/DatabaseConfig - 201 null application/json; charset=utf-8 6.6872ms
+2026-02-25 19:15:43.174 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5001/api/DatabaseConfig - null null
+2026-02-25 19:15:43.174 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:15:43.174 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api)'
+2026-02-25 19:15:43.175 +00:00 [INF] Route matched with {action = "GetAll", controller = "DatabaseConfig"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Nl2Sql.Core.Entities.DatabaseConfig]]] GetAll() on controller Nl2Sql.Api.Controllers.DatabaseConfigController (Nl2Sql.Api).
+2026-02-25 19:15:43.186 +00:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Nl2Sql.Core.Entities.DatabaseConfig, Nl2Sql.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-02-25 19:15:43.186 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api) in 11.1254ms
+2026-02-25 19:15:43.186 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api)'
+2026-02-25 19:15:43.186 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5001/api/DatabaseConfig - 200 null application/json; charset=utf-8 12.4245ms
+2026-02-25 19:15:51.285 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5001/api/DatabaseConfig - null null
+2026-02-25 19:15:51.286 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:15:51.286 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api)'
+2026-02-25 19:15:51.286 +00:00 [INF] Route matched with {action = "GetAll", controller = "DatabaseConfig"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Nl2Sql.Core.Entities.DatabaseConfig]]] GetAll() on controller Nl2Sql.Api.Controllers.DatabaseConfigController (Nl2Sql.Api).
+2026-02-25 19:15:51.290 +00:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Nl2Sql.Core.Entities.DatabaseConfig, Nl2Sql.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-02-25 19:15:51.290 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api) in 4.1409ms
+2026-02-25 19:15:51.290 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api)'
+2026-02-25 19:15:51.291 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5001/api/DatabaseConfig - 200 null application/json; charset=utf-8 5.4186ms
