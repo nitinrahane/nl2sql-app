@@ -71,3 +71,226 @@
 2026-02-25 19:15:51.290 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api) in 4.1409ms
 2026-02-25 19:15:51.290 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api)'
 2026-02-25 19:15:51.291 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5001/api/DatabaseConfig - 200 null application/json; charset=utf-8 5.4186ms
+2026-02-25 19:33:09.553 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5001/api/DatabaseConfig - null null
+2026-02-25 19:33:09.555 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:33:09.555 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api)'
+2026-02-25 19:33:09.555 +00:00 [INF] Route matched with {action = "GetAll", controller = "DatabaseConfig"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Nl2Sql.Core.Entities.DatabaseConfig]]] GetAll() on controller Nl2Sql.Api.Controllers.DatabaseConfigController (Nl2Sql.Api).
+2026-02-25 19:33:09.559 +00:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Nl2Sql.Core.Entities.DatabaseConfig, Nl2Sql.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-02-25 19:33:09.560 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api) in 4.5853ms
+2026-02-25 19:33:09.560 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api)'
+2026-02-25 19:33:09.560 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5001/api/DatabaseConfig - 200 null application/json; charset=utf-8 6.9955ms
+2026-02-25 19:33:53.605 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5001/api/DatabaseConfig - null null
+2026-02-25 19:33:53.606 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:33:53.606 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api)'
+2026-02-25 19:33:53.606 +00:00 [INF] Route matched with {action = "GetAll", controller = "DatabaseConfig"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Nl2Sql.Core.Entities.DatabaseConfig]]] GetAll() on controller Nl2Sql.Api.Controllers.DatabaseConfigController (Nl2Sql.Api).
+2026-02-25 19:33:53.607 +00:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Nl2Sql.Core.Entities.DatabaseConfig, Nl2Sql.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-02-25 19:33:53.607 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api) in 1.1371ms
+2026-02-25 19:33:53.607 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api)'
+2026-02-25 19:33:53.607 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5001/api/DatabaseConfig - 200 null application/json; charset=utf-8 1.7629ms
+2026-02-25 19:34:13.058 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5001/api/DatabaseConfig - null null
+2026-02-25 19:34:13.058 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:34:13.058 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api)'
+2026-02-25 19:34:13.058 +00:00 [INF] Route matched with {action = "GetAll", controller = "DatabaseConfig"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Nl2Sql.Core.Entities.DatabaseConfig]]] GetAll() on controller Nl2Sql.Api.Controllers.DatabaseConfigController (Nl2Sql.Api).
+2026-02-25 19:34:13.060 +00:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Nl2Sql.Core.Entities.DatabaseConfig, Nl2Sql.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-02-25 19:34:13.060 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api) in 1.2781ms
+2026-02-25 19:34:13.060 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api)'
+2026-02-25 19:34:13.060 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5001/api/DatabaseConfig - 200 null application/json; charset=utf-8 1.9214ms
+2026-02-25 19:36:09.156 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5001/api/Query/history?limit=20 - null null
+2026-02-25 19:36:09.156 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5001/api/DatabaseConfig - null null
+2026-02-25 19:36:09.156 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:36:09.156 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api)'
+2026-02-25 19:36:09.157 +00:00 [INF] Route matched with {action = "GetAll", controller = "DatabaseConfig"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Nl2Sql.Core.Entities.DatabaseConfig]]] GetAll() on controller Nl2Sql.Api.Controllers.DatabaseConfigController (Nl2Sql.Api).
+2026-02-25 19:36:09.157 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:36:09.157 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.QueryController.GetHistory (Nl2Sql.Api)'
+2026-02-25 19:36:09.157 +00:00 [INF] Route matched with {action = "GetHistory", controller = "Query"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Nl2Sql.Core.Entities.QueryHistory]]] GetHistory(Int32) on controller Nl2Sql.Api.Controllers.QueryController (Nl2Sql.Api).
+2026-02-25 19:36:09.158 +00:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Nl2Sql.Core.Entities.DatabaseConfig, Nl2Sql.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-02-25 19:36:09.158 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api) in 1.134ms
+2026-02-25 19:36:09.158 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api)'
+2026-02-25 19:36:09.158 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5001/api/DatabaseConfig - 200 null application/json; charset=utf-8 1.7492ms
+2026-02-25 19:36:09.163 +00:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Nl2Sql.Core.Entities.QueryHistory, Nl2Sql.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-02-25 19:36:09.163 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.QueryController.GetHistory (Nl2Sql.Api) in 6.1138ms
+2026-02-25 19:36:09.164 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.QueryController.GetHistory (Nl2Sql.Api)'
+2026-02-25 19:36:09.164 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5001/api/Query/history?limit=20 - 200 null application/json; charset=utf-8 7.702ms
+2026-02-25 19:36:09.171 +00:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5001/api/Query/suggest - null null
+2026-02-25 19:36:09.171 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:36:09.171 +00:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5001/api/Query/suggest - 204 null null 0.2918ms
+2026-02-25 19:36:09.172 +00:00 [INF] Request starting HTTP/1.1 POST http://localhost:5001/api/Query/suggest - application/json 48
+2026-02-25 19:36:09.172 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:36:09.172 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api)'
+2026-02-25 19:36:09.177 +00:00 [INF] Route matched with {action = "SuggestQuestions", controller = "Query"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[System.String]]] SuggestQuestions(Int32) on controller Nl2Sql.Api.Controllers.QueryController (Nl2Sql.Api).
+2026-02-25 19:36:09.185 +00:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2026-02-25 19:36:09.198 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api) in 20.962ms
+2026-02-25 19:36:09.198 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api)'
+2026-02-25 19:36:09.198 +00:00 [INF] Request finished HTTP/1.1 POST http://localhost:5001/api/Query/suggest - 400 null application/problem+json; charset=utf-8 26.6756ms
+2026-02-25 19:36:10.205 +00:00 [INF] Request starting HTTP/1.1 POST http://localhost:5001/api/Query/suggest - application/json 48
+2026-02-25 19:36:10.205 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:36:10.205 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api)'
+2026-02-25 19:36:10.205 +00:00 [INF] Route matched with {action = "SuggestQuestions", controller = "Query"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[System.String]]] SuggestQuestions(Int32) on controller Nl2Sql.Api.Controllers.QueryController (Nl2Sql.Api).
+2026-02-25 19:36:10.206 +00:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2026-02-25 19:36:10.206 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api) in 1.1768ms
+2026-02-25 19:36:10.206 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api)'
+2026-02-25 19:36:10.206 +00:00 [INF] Request finished HTTP/1.1 POST http://localhost:5001/api/Query/suggest - 400 null application/problem+json; charset=utf-8 1.7705ms
+2026-02-25 19:36:12.211 +00:00 [INF] Request starting HTTP/1.1 POST http://localhost:5001/api/Query/suggest - application/json 48
+2026-02-25 19:36:12.211 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:36:12.212 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api)'
+2026-02-25 19:36:12.212 +00:00 [INF] Route matched with {action = "SuggestQuestions", controller = "Query"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[System.String]]] SuggestQuestions(Int32) on controller Nl2Sql.Api.Controllers.QueryController (Nl2Sql.Api).
+2026-02-25 19:36:12.213 +00:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2026-02-25 19:36:12.213 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api) in 1.2862ms
+2026-02-25 19:36:12.213 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api)'
+2026-02-25 19:36:12.213 +00:00 [INF] Request finished HTTP/1.1 POST http://localhost:5001/api/Query/suggest - 400 null application/problem+json; charset=utf-8 2.2988ms
+2026-02-25 19:36:16.217 +00:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5001/api/Query/suggest - null null
+2026-02-25 19:36:16.218 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:36:16.218 +00:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5001/api/Query/suggest - 204 null null 0.382ms
+2026-02-25 19:36:16.219 +00:00 [INF] Request starting HTTP/1.1 POST http://localhost:5001/api/Query/suggest - application/json 48
+2026-02-25 19:36:16.219 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:36:16.219 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api)'
+2026-02-25 19:36:16.219 +00:00 [INF] Route matched with {action = "SuggestQuestions", controller = "Query"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[System.String]]] SuggestQuestions(Int32) on controller Nl2Sql.Api.Controllers.QueryController (Nl2Sql.Api).
+2026-02-25 19:36:16.220 +00:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2026-02-25 19:36:16.220 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api) in 0.8443ms
+2026-02-25 19:36:16.220 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api)'
+2026-02-25 19:36:16.220 +00:00 [INF] Request finished HTTP/1.1 POST http://localhost:5001/api/Query/suggest - 400 null application/problem+json; charset=utf-8 1.3603ms
+2026-02-25 19:38:09.502 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5001/api/DatabaseConfig - null null
+2026-02-25 19:38:09.502 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5001/api/Query/history?limit=20 - null null
+2026-02-25 19:38:09.502 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:38:09.502 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api)'
+2026-02-25 19:38:09.503 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:38:09.503 +00:00 [INF] Route matched with {action = "GetAll", controller = "DatabaseConfig"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Nl2Sql.Core.Entities.DatabaseConfig]]] GetAll() on controller Nl2Sql.Api.Controllers.DatabaseConfigController (Nl2Sql.Api).
+2026-02-25 19:38:09.503 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.QueryController.GetHistory (Nl2Sql.Api)'
+2026-02-25 19:38:09.503 +00:00 [INF] Route matched with {action = "GetHistory", controller = "Query"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Nl2Sql.Core.Entities.QueryHistory]]] GetHistory(Int32) on controller Nl2Sql.Api.Controllers.QueryController (Nl2Sql.Api).
+2026-02-25 19:38:09.503 +00:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Nl2Sql.Core.Entities.DatabaseConfig, Nl2Sql.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-02-25 19:38:09.504 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api) in 1.0146ms
+2026-02-25 19:38:09.504 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api)'
+2026-02-25 19:38:09.504 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5001/api/DatabaseConfig - 200 null application/json; charset=utf-8 1.5867ms
+2026-02-25 19:38:09.504 +00:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Nl2Sql.Core.Entities.QueryHistory, Nl2Sql.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-02-25 19:38:09.504 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.QueryController.GetHistory (Nl2Sql.Api) in 1.3786ms
+2026-02-25 19:38:09.504 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.QueryController.GetHistory (Nl2Sql.Api)'
+2026-02-25 19:38:09.504 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5001/api/Query/history?limit=20 - 200 null application/json; charset=utf-8 1.7439ms
+2026-02-25 19:38:09.505 +00:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5001/api/Query/suggest - null null
+2026-02-25 19:38:09.505 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:38:09.505 +00:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5001/api/Query/suggest - 204 null null 0.178ms
+2026-02-25 19:38:09.506 +00:00 [INF] Request starting HTTP/1.1 POST http://localhost:5001/api/Query/suggest - application/json 48
+2026-02-25 19:38:09.506 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:38:09.506 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api)'
+2026-02-25 19:38:09.506 +00:00 [INF] Route matched with {action = "SuggestQuestions", controller = "Query"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[System.String]]] SuggestQuestions(Int32) on controller Nl2Sql.Api.Controllers.QueryController (Nl2Sql.Api).
+2026-02-25 19:38:09.506 +00:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2026-02-25 19:38:09.506 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api) in 0.5658ms
+2026-02-25 19:38:09.507 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api)'
+2026-02-25 19:38:09.507 +00:00 [INF] Request finished HTTP/1.1 POST http://localhost:5001/api/Query/suggest - 400 null application/problem+json; charset=utf-8 0.8206ms
+2026-02-25 19:38:10.510 +00:00 [INF] Request starting HTTP/1.1 POST http://localhost:5001/api/Query/suggest - application/json 48
+2026-02-25 19:38:10.510 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:38:10.510 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api)'
+2026-02-25 19:38:10.510 +00:00 [INF] Route matched with {action = "SuggestQuestions", controller = "Query"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[System.String]]] SuggestQuestions(Int32) on controller Nl2Sql.Api.Controllers.QueryController (Nl2Sql.Api).
+2026-02-25 19:38:10.511 +00:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2026-02-25 19:38:10.511 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api) in 0.9088ms
+2026-02-25 19:38:10.511 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api)'
+2026-02-25 19:38:10.511 +00:00 [INF] Request finished HTTP/1.1 POST http://localhost:5001/api/Query/suggest - 400 null application/problem+json; charset=utf-8 1.4503ms
+2026-02-25 19:38:12.516 +00:00 [INF] Request starting HTTP/1.1 POST http://localhost:5001/api/Query/suggest - application/json 48
+2026-02-25 19:38:12.516 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:38:12.516 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api)'
+2026-02-25 19:38:12.516 +00:00 [INF] Route matched with {action = "SuggestQuestions", controller = "Query"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[System.String]]] SuggestQuestions(Int32) on controller Nl2Sql.Api.Controllers.QueryController (Nl2Sql.Api).
+2026-02-25 19:38:12.517 +00:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2026-02-25 19:38:12.517 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api) in 0.8406ms
+2026-02-25 19:38:12.517 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api)'
+2026-02-25 19:38:12.517 +00:00 [INF] Request finished HTTP/1.1 POST http://localhost:5001/api/Query/suggest - 400 null application/problem+json; charset=utf-8 1.3808ms
+2026-02-25 19:38:16.521 +00:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5001/api/Query/suggest - null null
+2026-02-25 19:38:16.521 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:38:16.521 +00:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5001/api/Query/suggest - 204 null null 0.3195ms
+2026-02-25 19:38:16.523 +00:00 [INF] Request starting HTTP/1.1 POST http://localhost:5001/api/Query/suggest - application/json 48
+2026-02-25 19:38:16.523 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:38:16.523 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api)'
+2026-02-25 19:38:16.523 +00:00 [INF] Route matched with {action = "SuggestQuestions", controller = "Query"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[System.String]]] SuggestQuestions(Int32) on controller Nl2Sql.Api.Controllers.QueryController (Nl2Sql.Api).
+2026-02-25 19:38:16.524 +00:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2026-02-25 19:38:16.524 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api) in 0.7563ms
+2026-02-25 19:38:16.524 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api)'
+2026-02-25 19:38:16.524 +00:00 [INF] Request finished HTTP/1.1 POST http://localhost:5001/api/Query/suggest - 400 null application/problem+json; charset=utf-8 1.1852ms
+2026-02-25 19:38:35.074 +00:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5001/api/Query/suggest - null null
+2026-02-25 19:38:35.074 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:38:35.074 +00:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5001/api/Query/suggest - 204 null null 0.3545ms
+2026-02-25 19:38:35.075 +00:00 [INF] Request starting HTTP/1.1 POST http://localhost:5001/api/Query/suggest - application/json 48
+2026-02-25 19:38:35.075 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:38:35.075 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api)'
+2026-02-25 19:38:35.075 +00:00 [INF] Route matched with {action = "SuggestQuestions", controller = "Query"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[System.String]]] SuggestQuestions(Int32) on controller Nl2Sql.Api.Controllers.QueryController (Nl2Sql.Api).
+2026-02-25 19:38:35.076 +00:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2026-02-25 19:38:35.076 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api) in 0.778ms
+2026-02-25 19:38:35.076 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api)'
+2026-02-25 19:38:35.076 +00:00 [INF] Request finished HTTP/1.1 POST http://localhost:5001/api/Query/suggest - 400 null application/problem+json; charset=utf-8 1.5351ms
+2026-02-25 19:38:36.083 +00:00 [INF] Request starting HTTP/1.1 POST http://localhost:5001/api/Query/suggest - application/json 48
+2026-02-25 19:38:36.083 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:38:36.083 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api)'
+2026-02-25 19:38:36.083 +00:00 [INF] Route matched with {action = "SuggestQuestions", controller = "Query"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[System.String]]] SuggestQuestions(Int32) on controller Nl2Sql.Api.Controllers.QueryController (Nl2Sql.Api).
+2026-02-25 19:38:36.084 +00:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2026-02-25 19:38:36.084 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api) in 0.8113ms
+2026-02-25 19:38:36.084 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api)'
+2026-02-25 19:38:36.084 +00:00 [INF] Request finished HTTP/1.1 POST http://localhost:5001/api/Query/suggest - 400 null application/problem+json; charset=utf-8 1.4542ms
+2026-02-25 19:38:36.497 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5001/api/Query/history?limit=20 - null null
+2026-02-25 19:38:36.497 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5001/api/DatabaseConfig - null null
+2026-02-25 19:38:36.497 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:38:36.497 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:38:36.497 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api)'
+2026-02-25 19:38:36.497 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.QueryController.GetHistory (Nl2Sql.Api)'
+2026-02-25 19:38:36.497 +00:00 [INF] Route matched with {action = "GetAll", controller = "DatabaseConfig"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Nl2Sql.Core.Entities.DatabaseConfig]]] GetAll() on controller Nl2Sql.Api.Controllers.DatabaseConfigController (Nl2Sql.Api).
+2026-02-25 19:38:36.497 +00:00 [INF] Route matched with {action = "GetHistory", controller = "Query"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Nl2Sql.Core.Entities.QueryHistory]]] GetHistory(Int32) on controller Nl2Sql.Api.Controllers.QueryController (Nl2Sql.Api).
+2026-02-25 19:38:36.498 +00:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Nl2Sql.Core.Entities.DatabaseConfig, Nl2Sql.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-02-25 19:38:36.498 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api) in 0.9462ms
+2026-02-25 19:38:36.498 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api)'
+2026-02-25 19:38:36.498 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5001/api/DatabaseConfig - 200 null application/json; charset=utf-8 1.482ms
+2026-02-25 19:38:36.498 +00:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Nl2Sql.Core.Entities.QueryHistory, Nl2Sql.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-02-25 19:38:36.498 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.QueryController.GetHistory (Nl2Sql.Api) in 1.2787ms
+2026-02-25 19:38:36.498 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.QueryController.GetHistory (Nl2Sql.Api)'
+2026-02-25 19:38:36.498 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5001/api/Query/history?limit=20 - 200 null application/json; charset=utf-8 1.809ms
+2026-02-25 19:38:36.504 +00:00 [INF] Request starting HTTP/1.1 POST http://localhost:5001/api/Query/suggest - application/json 48
+2026-02-25 19:38:36.505 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:38:36.506 +00:00 [INF] Request finished HTTP/1.1 POST http://localhost:5001/api/Query/suggest - 429 null null 1.3067ms
+2026-02-25 19:38:37.510 +00:00 [INF] Request starting HTTP/1.1 POST http://localhost:5001/api/Query/suggest - application/json 48
+2026-02-25 19:38:37.510 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:38:37.510 +00:00 [INF] Request finished HTTP/1.1 POST http://localhost:5001/api/Query/suggest - 429 null null 0.5321ms
+2026-02-25 19:38:38.686 +00:00 [INF] Request starting HTTP/1.1 POST http://localhost:5001/api/Query/suggest - application/json 48
+2026-02-25 19:38:38.686 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:38:38.686 +00:00 [INF] Request finished HTTP/1.1 POST http://localhost:5001/api/Query/suggest - 429 null null 0.4174ms
+2026-02-25 19:38:39.690 +00:00 [INF] Request starting HTTP/1.1 POST http://localhost:5001/api/Query/suggest - application/json 48
+2026-02-25 19:38:39.690 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:38:39.690 +00:00 [INF] Request finished HTTP/1.1 POST http://localhost:5001/api/Query/suggest - 429 null null 0.3812ms
+2026-02-25 19:38:40.644 +00:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5001/api/Query/suggest - null null
+2026-02-25 19:38:40.645 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:38:40.645 +00:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5001/api/Query/suggest - 204 null null 0.2955ms
+2026-02-25 19:38:40.645 +00:00 [INF] Request starting HTTP/1.1 POST http://localhost:5001/api/Query/suggest - application/json 48
+2026-02-25 19:38:40.646 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:38:40.646 +00:00 [INF] Request finished HTTP/1.1 POST http://localhost:5001/api/Query/suggest - 429 null null 0.2832ms
+2026-02-25 19:38:41.649 +00:00 [INF] Request starting HTTP/1.1 POST http://localhost:5001/api/Query/suggest - application/json 48
+2026-02-25 19:38:41.650 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:38:41.650 +00:00 [INF] Request finished HTTP/1.1 POST http://localhost:5001/api/Query/suggest - 429 null null 0.383ms
+2026-02-25 19:39:17.156 +00:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5001/api/Query/suggest - null null
+2026-02-25 19:39:17.156 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5001/api/Query/history?limit=20 - null null
+2026-02-25 19:39:17.157 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:39:17.157 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.QueryController.GetHistory (Nl2Sql.Api)'
+2026-02-25 19:39:17.157 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:39:17.160 +00:00 [INF] Route matched with {action = "GetHistory", controller = "Query"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Nl2Sql.Core.Entities.QueryHistory]]] GetHistory(Int32) on controller Nl2Sql.Api.Controllers.QueryController (Nl2Sql.Api).
+2026-02-25 19:39:17.161 +00:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5001/api/Query/suggest - 204 null null 5.1385ms
+2026-02-25 19:39:17.162 +00:00 [INF] Request starting HTTP/1.1 POST http://localhost:5001/api/Query/suggest - application/json 48
+2026-02-25 19:39:17.162 +00:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Nl2Sql.Core.Entities.QueryHistory, Nl2Sql.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-02-25 19:39:17.162 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:39:17.162 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api)'
+2026-02-25 19:39:17.162 +00:00 [INF] Route matched with {action = "SuggestQuestions", controller = "Query"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[System.String]]] SuggestQuestions(Int32) on controller Nl2Sql.Api.Controllers.QueryController (Nl2Sql.Api).
+2026-02-25 19:39:17.163 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.QueryController.GetHistory (Nl2Sql.Api) in 2.0179ms
+2026-02-25 19:39:17.163 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.QueryController.GetHistory (Nl2Sql.Api)'
+2026-02-25 19:39:17.163 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5001/api/Query/history?limit=20 - 200 null application/json; charset=utf-8 6.2195ms
+2026-02-25 19:39:17.163 +00:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2026-02-25 19:39:17.163 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api) in 1.0957ms
+2026-02-25 19:39:17.163 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api)'
+2026-02-25 19:39:17.163 +00:00 [INF] Request finished HTTP/1.1 POST http://localhost:5001/api/Query/suggest - 400 null application/problem+json; charset=utf-8 1.4532ms
+2026-02-25 19:39:17.164 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5001/api/DatabaseConfig - null null
+2026-02-25 19:39:17.164 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:39:17.164 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api)'
+2026-02-25 19:39:17.164 +00:00 [INF] Route matched with {action = "GetAll", controller = "DatabaseConfig"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Nl2Sql.Core.Entities.DatabaseConfig]]] GetAll() on controller Nl2Sql.Api.Controllers.DatabaseConfigController (Nl2Sql.Api).
+2026-02-25 19:39:17.165 +00:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Nl2Sql.Core.Entities.DatabaseConfig, Nl2Sql.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-02-25 19:39:17.165 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api) in 0.8032ms
+2026-02-25 19:39:17.165 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api)'
+2026-02-25 19:39:17.165 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5001/api/DatabaseConfig - 200 null application/json; charset=utf-8 1.1478ms
+2026-02-25 19:39:18.167 +00:00 [INF] Request starting HTTP/1.1 POST http://localhost:5001/api/Query/suggest - application/json 48
+2026-02-25 19:39:18.167 +00:00 [INF] CORS policy execution successful.
+2026-02-25 19:39:18.168 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api)'
+2026-02-25 19:39:18.168 +00:00 [INF] Route matched with {action = "SuggestQuestions", controller = "Query"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[System.String]]] SuggestQuestions(Int32) on controller Nl2Sql.Api.Controllers.QueryController (Nl2Sql.Api).
+2026-02-25 19:39:18.169 +00:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2026-02-25 19:39:18.169 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api) in 1.2134ms
+2026-02-25 19:39:18.169 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api)'
+2026-02-25 19:39:18.169 +00:00 [INF] Request finished HTTP/1.1 POST http://localhost:5001/api/Query/suggest - 400 null application/problem+json; charset=utf-8 2.091ms
