@@ -4,7 +4,7 @@ const API_URL = 'http://localhost:5001/api';
 
 const apiClient = axios.create({
     baseURL: API_URL,
-    timeout: 60000,
+    timeout: 120000,
 });
 
 export interface DatabaseConfig {
@@ -98,6 +98,42 @@ export interface SchemaInfo {
     totalTableCount: number;
 }
 
+// Agent types
+export interface AgentRequest {
+    question: string;
+    databaseConfigId: number;
+}
+
+export interface AgentStep {
+    type: string;
+    description: string;
+    detail?: string;
+    success: boolean;
+    durationMs?: number;
+}
+
+export interface AgentMetadata {
+    sqlAttempts: number;
+    tablesDiscovered: number;
+    totalDurationMs: number;
+    toolCallCount: number;
+}
+
+export interface AgentResponse {
+    success: boolean;
+    explanation: string;
+    sqlQuery?: string;
+    results?: QueryResult;
+    visualization?: VisualizationRecommendation;
+    insights: string[];
+    assumptions: string[];
+    limitations: string[];
+    safetyChecks: string[];
+    steps: AgentStep[];
+    metadata: AgentMetadata;
+    error?: string;
+}
+
 export const DB_TYPE_LABELS: Record<number, string> = {
     0: 'SQL Server',
     1: 'PostgreSQL',
@@ -157,5 +193,14 @@ export const api = {
     },
     clearHistory: async (): Promise<void> => {
         await apiClient.delete('/Query/history');
+    },
+
+    // Agent
+    askAgent: async (question: string, databaseConfigId: number): Promise<AgentResponse> => {
+        const response = await apiClient.post<AgentResponse>('/Agent/ask', {
+            question,
+            databaseConfigId,
+        });
+        return response.data;
     },
 };

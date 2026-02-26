@@ -39,6 +39,7 @@ builder.Services.AddScoped<Nl2Sql.Core.Interfaces.ISqlValidationService, Nl2Sql.
 builder.Services.AddScoped<Nl2Sql.Core.Interfaces.IQueryHistoryService, Nl2Sql.Infrastructure.Services.QueryHistoryService>();
 builder.Services.AddScoped<Nl2Sql.Core.Interfaces.IQueryExecutionService, Nl2Sql.Infrastructure.Services.QueryExecutionService>();
 builder.Services.AddHttpClient<Nl2Sql.Core.Interfaces.IAIService, Nl2Sql.Infrastructure.Services.ClaudeApiService>();
+builder.Services.AddHttpClient<Nl2Sql.Core.Interfaces.IAgentService, Nl2Sql.Infrastructure.Services.AgentOrchestrator>();
 
 
 // Add DbContext
