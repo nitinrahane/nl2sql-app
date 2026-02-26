@@ -4,21 +4,29 @@ import { Layout } from './components/Layout';
 import { HomePage } from './pages/HomePage';
 import { ConnectionManager } from './components/ConnectionManager';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            retry: 1,
+            staleTime: 30_000,
+            refetchOnWindowFocus: false,
+        },
+    },
+});
 
 function App() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<HomePage />} />
-            <Route path="settings" element={<ConnectionManager />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </QueryClientProvider>
-  );
+    return (
+        <QueryClientProvider client={queryClient}>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<Layout />}>
+                        <Route index element={<HomePage />} />
+                        <Route path="settings" element={<ConnectionManager />} />
+                    </Route>
+                </Routes>
+            </BrowserRouter>
+        </QueryClientProvider>
+    );
 }
 
-export default App
+export default App;
