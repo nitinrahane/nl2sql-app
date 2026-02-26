@@ -234,3 +234,218 @@ Npgsql.NpgsqlException (0x80004005): Failed to connect to 127.0.0.1:5432
 2026-02-26 16:34:05.659 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api) in 4.8131ms
 2026-02-26 16:34:05.659 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api)'
 2026-02-26 16:34:05.659 +00:00 [INF] Request finished HTTP/1.1 POST http://localhost:5001/api/Query/suggest - 500 null application/json; charset=utf-8 5.3892ms
+2026-02-26 16:34:48.507 +00:00 [INF] Application is shutting down...
+2026-02-26 16:34:59.011 +00:00 [INF] Now listening on: http://localhost:5001
+2026-02-26 16:34:59.037 +00:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-02-26 16:34:59.037 +00:00 [INF] Hosting environment: Development
+2026-02-26 16:34:59.038 +00:00 [INF] Content root path: /workspace/Api
+2026-02-26 16:35:17.911 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5001/api/health - null null
+2026-02-26 16:35:17.944 +00:00 [WRN] Failed to determine the https port for redirect.
+2026-02-26 16:35:17.951 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.HealthController.Get (Nl2Sql.Api)'
+2026-02-26 16:35:17.957 +00:00 [INF] Route matched with {action = "Get", controller = "Health"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Get() on controller Nl2Sql.Api.Controllers.HealthController (Nl2Sql.Api).
+2026-02-26 16:35:17.961 +00:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`2[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.DateTime, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-26 16:35:17.982 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.HealthController.Get (Nl2Sql.Api) in 22.141ms
+2026-02-26 16:35:17.982 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.HealthController.Get (Nl2Sql.Api)'
+2026-02-26 16:35:17.983 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5001/api/health - 200 null application/json; charset=utf-8 73.9072ms
+2026-02-26 16:35:29.710 +00:00 [INF] Request starting HTTP/1.1 POST http://localhost:5001/api/Agent/ask - application/json 54
+2026-02-26 16:35:29.713 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.AgentController.Ask (Nl2Sql.Api)'
+2026-02-26 16:35:29.725 +00:00 [INF] Route matched with {action = "Ask", controller = "Agent"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Nl2Sql.Core.Models.AgentResponse]] Ask(Nl2Sql.Core.Models.AgentRequest) on controller Nl2Sql.Api.Controllers.AgentController (Nl2Sql.Api).
+2026-02-26 16:35:29.812 +00:00 [INF] Agent request: Show me all tables (db: 1)
+2026-02-26 16:35:30.108 +00:00 [INF] Executing OkObjectResult, writing value of type 'Nl2Sql.Core.Models.AgentResponse'.
+2026-02-26 16:35:30.123 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.AgentController.Ask (Nl2Sql.Api) in 397.7785ms
+2026-02-26 16:35:30.123 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.AgentController.Ask (Nl2Sql.Api)'
+2026-02-26 16:35:30.125 +00:00 [INF] Request finished HTTP/1.1 POST http://localhost:5001/api/Agent/ask - 200 null application/json; charset=utf-8 415.0463ms
+2026-02-26 16:35:39.113 +00:00 [INF] Request starting HTTP/1.1 POST http://localhost:5001/api/DatabaseConfig - application/json 104
+2026-02-26 16:35:39.115 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.DatabaseConfigController.Create (Nl2Sql.Api)'
+2026-02-26 16:35:39.121 +00:00 [INF] Route matched with {action = "Create", controller = "DatabaseConfig"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Nl2Sql.Core.Entities.DatabaseConfig]] Create(Nl2Sql.Core.Entities.DatabaseConfig) on controller Nl2Sql.Api.Controllers.DatabaseConfigController (Nl2Sql.Api).
+2026-02-26 16:35:39.218 +00:00 [INF] Saved 1 entities to in-memory store.
+2026-02-26 16:35:39.222 +00:00 [INF] Executing CreatedAtActionResult, writing value of type 'Nl2Sql.Core.Entities.DatabaseConfig'.
+2026-02-26 16:35:39.233 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.DatabaseConfigController.Create (Nl2Sql.Api) in 111.8458ms
+2026-02-26 16:35:39.233 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.DatabaseConfigController.Create (Nl2Sql.Api)'
+2026-02-26 16:35:39.234 +00:00 [INF] Request finished HTTP/1.1 POST http://localhost:5001/api/DatabaseConfig - 201 null application/json; charset=utf-8 121.047ms
+2026-02-26 16:36:41.646 +00:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5001/api/Agent/ask - null null
+2026-02-26 16:36:41.649 +00:00 [INF] CORS policy execution successful.
+2026-02-26 16:36:41.652 +00:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5001/api/Agent/ask - 204 null null 5.6193ms
+2026-02-26 16:36:41.654 +00:00 [INF] Request starting HTTP/1.1 POST http://localhost:5001/api/Agent/ask - application/json 70
+2026-02-26 16:36:41.654 +00:00 [INF] CORS policy execution successful.
+2026-02-26 16:36:41.655 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.AgentController.Ask (Nl2Sql.Api)'
+2026-02-26 16:36:41.655 +00:00 [INF] Route matched with {action = "Ask", controller = "Agent"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Nl2Sql.Core.Models.AgentResponse]] Ask(Nl2Sql.Core.Models.AgentRequest) on controller Nl2Sql.Api.Controllers.AgentController (Nl2Sql.Api).
+2026-02-26 16:36:41.662 +00:00 [INF] Agent request: Show me all tables in the database (db: 1)
+2026-02-26 16:36:41.726 +00:00 [INF] Start processing HTTP request POST https://api.anthropic.com/v1/messages
+2026-02-26 16:36:41.727 +00:00 [INF] Sending HTTP request POST https://api.anthropic.com/v1/messages
+2026-02-26 16:36:41.976 +00:00 [INF] Received HTTP response headers after 246.7842ms - 401
+2026-02-26 16:36:41.976 +00:00 [INF] End processing HTTP request after 251.3407ms - 401
+2026-02-26 16:36:41.979 +00:00 [ERR] Agent failed for question: Show me all tables in the database
+System.Net.Http.HttpRequestException: Claude API error (Unauthorized): {"type":"error","error":{"type":"authentication_error","message":"x-api-key header is required"},"request_id":"req_011CYX1MgLNFZG34q2HUUdQP"}
+   at Nl2Sql.Infrastructure.Services.AgentOrchestrator.CallClaude(String systemPrompt, Object[] tools, List`1 messages) in /workspace/Infrastructure/Services/AgentOrchestrator.cs:line 370
+   at Nl2Sql.Infrastructure.Services.AgentOrchestrator.AskAsync(String question, Int32 databaseConfigId) in /workspace/Infrastructure/Services/AgentOrchestrator.cs:line 94
+2026-02-26 16:36:41.987 +00:00 [INF] Executing OkObjectResult, writing value of type 'Nl2Sql.Core.Models.AgentResponse'.
+2026-02-26 16:36:41.997 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.AgentController.Ask (Nl2Sql.Api) in 341.8535ms
+2026-02-26 16:36:41.997 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.AgentController.Ask (Nl2Sql.Api)'
+2026-02-26 16:36:41.999 +00:00 [INF] Request finished HTTP/1.1 POST http://localhost:5001/api/Agent/ask - 200 null application/json; charset=utf-8 345.0781ms
+2026-02-26 17:49:47.289 +00:00 [INF] Application is shutting down...
+2026-02-26 17:49:56.918 +00:00 [INF] Now listening on: http://localhost:5001
+2026-02-26 17:49:56.942 +00:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-02-26 17:49:56.943 +00:00 [INF] Hosting environment: Development
+2026-02-26 17:49:56.943 +00:00 [INF] Content root path: /workspace/Api
+2026-02-26 17:50:14.068 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5001/api/health - null null
+2026-02-26 17:50:14.102 +00:00 [WRN] Failed to determine the https port for redirect.
+2026-02-26 17:50:14.109 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.HealthController.Get (Nl2Sql.Api)'
+2026-02-26 17:50:14.115 +00:00 [INF] Route matched with {action = "Get", controller = "Health"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Get() on controller Nl2Sql.Api.Controllers.HealthController (Nl2Sql.Api).
+2026-02-26 17:50:14.119 +00:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`2[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.DateTime, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-26 17:50:14.140 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.HealthController.Get (Nl2Sql.Api) in 22.3351ms
+2026-02-26 17:50:14.141 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.HealthController.Get (Nl2Sql.Api)'
+2026-02-26 17:50:14.141 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5001/api/health - 200 null application/json; charset=utf-8 74.9101ms
+2026-02-26 17:50:22.370 +00:00 [INF] Request starting HTTP/1.1 POST http://localhost:5001/api/DatabaseConfig - application/json 127
+2026-02-26 17:50:22.374 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.DatabaseConfigController.Create (Nl2Sql.Api)'
+2026-02-26 17:50:22.386 +00:00 [INF] Route matched with {action = "Create", controller = "DatabaseConfig"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Nl2Sql.Core.Entities.DatabaseConfig]] Create(Nl2Sql.Core.Entities.DatabaseConfig) on controller Nl2Sql.Api.Controllers.DatabaseConfigController (Nl2Sql.Api).
+2026-02-26 17:50:22.726 +00:00 [INF] Saved 1 entities to in-memory store.
+2026-02-26 17:50:22.730 +00:00 [INF] Executing CreatedAtActionResult, writing value of type 'Nl2Sql.Core.Entities.DatabaseConfig'.
+2026-02-26 17:50:22.742 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.DatabaseConfigController.Create (Nl2Sql.Api) in 355.7585ms
+2026-02-26 17:50:22.742 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.DatabaseConfigController.Create (Nl2Sql.Api)'
+2026-02-26 17:50:22.744 +00:00 [INF] Request finished HTTP/1.1 POST http://localhost:5001/api/DatabaseConfig - 201 null application/json; charset=utf-8 374.0966ms
+2026-02-26 17:50:30.369 +00:00 [INF] Request starting HTTP/1.1 POST http://localhost:5001/api/Agent/ask - application/json 81
+2026-02-26 17:50:30.371 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.AgentController.Ask (Nl2Sql.Api)'
+2026-02-26 17:50:30.378 +00:00 [INF] Route matched with {action = "Ask", controller = "Agent"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Nl2Sql.Core.Models.AgentResponse]] Ask(Nl2Sql.Core.Models.AgentRequest) on controller Nl2Sql.Api.Controllers.AgentController (Nl2Sql.Api).
+2026-02-26 17:50:30.390 +00:00 [INF] Agent request: What are the top 5 products by total revenue? (db: 1)
+2026-02-26 17:50:30.551 +00:00 [INF] Start processing HTTP request POST https://api.anthropic.com/v1/messages
+2026-02-26 17:50:30.552 +00:00 [INF] Sending HTTP request POST https://api.anthropic.com/v1/messages
+2026-02-26 17:50:32.525 +00:00 [INF] Received HTTP response headers after 1971.0851ms - 200
+2026-02-26 17:50:32.526 +00:00 [INF] End processing HTTP request after 1975.7505ms - 200
+2026-02-26 17:50:32.769 +00:00 [INF] Start processing HTTP request POST https://api.anthropic.com/v1/messages
+2026-02-26 17:50:32.769 +00:00 [INF] Sending HTTP request POST https://api.anthropic.com/v1/messages
+2026-02-26 17:50:37.689 +00:00 [INF] Received HTTP response headers after 4919.7881ms - 200
+2026-02-26 17:50:37.690 +00:00 [INF] End processing HTTP request after 4920.4199ms - 200
+2026-02-26 17:50:37.707 +00:00 [INF] Start processing HTTP request POST https://api.anthropic.com/v1/messages
+2026-02-26 17:50:37.708 +00:00 [INF] Sending HTTP request POST https://api.anthropic.com/v1/messages
+2026-02-26 17:50:45.704 +00:00 [INF] Received HTTP response headers after 7996.7334ms - 200
+2026-02-26 17:50:45.705 +00:00 [INF] End processing HTTP request after 7997.4147ms - 200
+2026-02-26 17:50:45.708 +00:00 [INF] Start processing HTTP request POST https://api.anthropic.com/v1/messages
+2026-02-26 17:50:45.709 +00:00 [INF] Sending HTTP request POST https://api.anthropic.com/v1/messages
+2026-02-26 17:50:49.549 +00:00 [INF] Received HTTP response headers after 3840.5051ms - 200
+2026-02-26 17:50:49.549 +00:00 [INF] End processing HTTP request after 3841.0186ms - 200
+2026-02-26 17:50:49.573 +00:00 [INF] Saved 2 entities to in-memory store.
+2026-02-26 17:50:49.575 +00:00 [INF] Executing OkObjectResult, writing value of type 'Nl2Sql.Core.Models.AgentResponse'.
+2026-02-26 17:50:49.595 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.AgentController.Ask (Nl2Sql.Api) in 19217.043ms
+2026-02-26 17:50:49.595 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.AgentController.Ask (Nl2Sql.Api)'
+2026-02-26 17:50:49.597 +00:00 [INF] Request finished HTTP/1.1 POST http://localhost:5001/api/Agent/ask - 200 null application/json; charset=utf-8 19228.2569ms
+2026-02-26 17:51:56.669 +00:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5001/api/Query/suggest - null null
+2026-02-26 17:51:56.677 +00:00 [INF] CORS policy execution successful.
+2026-02-26 17:51:56.680 +00:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5001/api/Query/suggest - 204 null null 10.7424ms
+2026-02-26 17:51:56.683 +00:00 [INF] Request starting HTTP/1.1 POST http://localhost:5001/api/Query/suggest - application/json 48
+2026-02-26 17:51:56.684 +00:00 [INF] CORS policy execution successful.
+2026-02-26 17:51:56.685 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api)'
+2026-02-26 17:51:56.694 +00:00 [INF] Route matched with {action = "SuggestQuestions", controller = "Query"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[System.String]]] SuggestQuestions(Nl2Sql.Core.Models.AiQueryRequest) on controller Nl2Sql.Api.Controllers.QueryController (Nl2Sql.Api).
+2026-02-26 17:51:56.734 +00:00 [INF] Start processing HTTP request POST https://api.anthropic.com/v1/messages
+2026-02-26 17:51:56.734 +00:00 [INF] Sending HTTP request POST https://api.anthropic.com/v1/messages
+2026-02-26 17:51:59.576 +00:00 [INF] Received HTTP response headers after 2841.798ms - 200
+2026-02-26 17:51:59.576 +00:00 [INF] End processing HTTP request after 2842.3503ms - 200
+2026-02-26 17:51:59.579 +00:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-26 17:51:59.580 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api) in 2885.6757ms
+2026-02-26 17:51:59.580 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api)'
+2026-02-26 17:51:59.582 +00:00 [INF] Request finished HTTP/1.1 POST http://localhost:5001/api/Query/suggest - 200 null application/json; charset=utf-8 2899.0661ms
+2026-02-26 17:52:27.597 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5001/api/DatabaseConfig - null null
+2026-02-26 17:52:27.601 +00:00 [INF] CORS policy execution successful.
+2026-02-26 17:52:27.602 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api)'
+2026-02-26 17:52:27.613 +00:00 [INF] Route matched with {action = "GetAll", controller = "DatabaseConfig"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Nl2Sql.Core.Entities.DatabaseConfig]]] GetAll() on controller Nl2Sql.Api.Controllers.DatabaseConfigController (Nl2Sql.Api).
+2026-02-26 17:52:27.640 +00:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Nl2Sql.Core.Entities.DatabaseConfig, Nl2Sql.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-02-26 17:52:27.642 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api) in 28.3106ms
+2026-02-26 17:52:27.642 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api)'
+2026-02-26 17:52:27.642 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5001/api/DatabaseConfig - 200 null application/json; charset=utf-8 44.9606ms
+2026-02-26 17:52:38.216 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5001/api/Query/history?limit=20 - null null
+2026-02-26 17:52:38.216 +00:00 [INF] CORS policy execution successful.
+2026-02-26 17:52:38.216 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.QueryController.GetHistory (Nl2Sql.Api)'
+2026-02-26 17:52:38.230 +00:00 [INF] Route matched with {action = "GetHistory", controller = "Query"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Nl2Sql.Core.Entities.QueryHistory]]] GetHistory(Int32) on controller Nl2Sql.Api.Controllers.QueryController (Nl2Sql.Api).
+2026-02-26 17:52:38.277 +00:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Nl2Sql.Core.Entities.QueryHistory, Nl2Sql.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-02-26 17:52:38.279 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.QueryController.GetHistory (Nl2Sql.Api) in 38.8172ms
+2026-02-26 17:52:38.279 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.QueryController.GetHistory (Nl2Sql.Api)'
+2026-02-26 17:52:38.280 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5001/api/Query/history?limit=20 - 200 null application/json; charset=utf-8 63.9992ms
+2026-02-26 17:53:09.516 +00:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5001/api/Agent/ask - null null
+2026-02-26 17:53:09.524 +00:00 [INF] CORS policy execution successful.
+2026-02-26 17:53:09.527 +00:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5001/api/Agent/ask - 204 null null 10.1015ms
+2026-02-26 17:53:09.528 +00:00 [INF] Request starting HTTP/1.1 POST http://localhost:5001/api/Agent/ask - application/json 81
+2026-02-26 17:53:09.528 +00:00 [INF] CORS policy execution successful.
+2026-02-26 17:53:09.529 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.AgentController.Ask (Nl2Sql.Api)'
+2026-02-26 17:53:09.530 +00:00 [INF] Route matched with {action = "Ask", controller = "Agent"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Nl2Sql.Core.Models.AgentResponse]] Ask(Nl2Sql.Core.Models.AgentRequest) on controller Nl2Sql.Api.Controllers.AgentController (Nl2Sql.Api).
+2026-02-26 17:53:09.537 +00:00 [INF] Agent request: What are the top 5 products by total revenue? (db: 1)
+2026-02-26 17:53:09.545 +00:00 [INF] Start processing HTTP request POST https://api.anthropic.com/v1/messages
+2026-02-26 17:53:09.545 +00:00 [INF] Sending HTTP request POST https://api.anthropic.com/v1/messages
+2026-02-26 17:53:11.165 +00:00 [INF] Received HTTP response headers after 1619.41ms - 200
+2026-02-26 17:53:11.165 +00:00 [INF] End processing HTTP request after 1619.857ms - 200
+2026-02-26 17:53:11.166 +00:00 [INF] Start processing HTTP request POST https://api.anthropic.com/v1/messages
+2026-02-26 17:53:11.166 +00:00 [INF] Sending HTTP request POST https://api.anthropic.com/v1/messages
+2026-02-26 17:53:16.449 +00:00 [INF] Received HTTP response headers after 5283.1345ms - 200
+2026-02-26 17:53:16.449 +00:00 [INF] End processing HTTP request after 5283.4528ms - 200
+2026-02-26 17:53:16.457 +00:00 [INF] Start processing HTTP request POST https://api.anthropic.com/v1/messages
+2026-02-26 17:53:16.457 +00:00 [INF] Sending HTTP request POST https://api.anthropic.com/v1/messages
+2026-02-26 17:53:25.797 +00:00 [INF] Received HTTP response headers after 9339.7702ms - 200
+2026-02-26 17:53:25.797 +00:00 [INF] End processing HTTP request after 9340.0895ms - 200
+2026-02-26 17:53:25.798 +00:00 [INF] Start processing HTTP request POST https://api.anthropic.com/v1/messages
+2026-02-26 17:53:25.798 +00:00 [INF] Sending HTTP request POST https://api.anthropic.com/v1/messages
+2026-02-26 17:53:28.992 +00:00 [INF] Received HTTP response headers after 3194.7749ms - 200
+2026-02-26 17:53:28.993 +00:00 [INF] End processing HTTP request after 3195.0056ms - 200
+2026-02-26 17:53:28.994 +00:00 [INF] Saved 1 entities to in-memory store.
+2026-02-26 17:53:28.995 +00:00 [INF] Executing OkObjectResult, writing value of type 'Nl2Sql.Core.Models.AgentResponse'.
+2026-02-26 17:53:28.996 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.AgentController.Ask (Nl2Sql.Api) in 19465.8722ms
+2026-02-26 17:53:28.996 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.AgentController.Ask (Nl2Sql.Api)'
+2026-02-26 17:53:28.996 +00:00 [INF] Request finished HTTP/1.1 POST http://localhost:5001/api/Agent/ask - 200 null application/json; charset=utf-8 19467.9489ms
+2026-02-26 17:55:59.860 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5001/api/DatabaseConfig - null null
+2026-02-26 17:55:59.862 +00:00 [INF] CORS policy execution successful.
+2026-02-26 17:55:59.862 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api)'
+2026-02-26 17:55:59.862 +00:00 [INF] Route matched with {action = "GetAll", controller = "DatabaseConfig"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Nl2Sql.Core.Entities.DatabaseConfig]]] GetAll() on controller Nl2Sql.Api.Controllers.DatabaseConfigController (Nl2Sql.Api).
+2026-02-26 17:55:59.865 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5001/api/Query/history?limit=20 - null null
+2026-02-26 17:55:59.866 +00:00 [INF] CORS policy execution successful.
+2026-02-26 17:55:59.866 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.QueryController.GetHistory (Nl2Sql.Api)'
+2026-02-26 17:55:59.866 +00:00 [INF] Route matched with {action = "GetHistory", controller = "Query"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Nl2Sql.Core.Entities.QueryHistory]]] GetHistory(Int32) on controller Nl2Sql.Api.Controllers.QueryController (Nl2Sql.Api).
+2026-02-26 17:55:59.868 +00:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Nl2Sql.Core.Entities.DatabaseConfig, Nl2Sql.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-02-26 17:55:59.868 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api) in 5.9058ms
+2026-02-26 17:55:59.868 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.DatabaseConfigController.GetAll (Nl2Sql.Api)'
+2026-02-26 17:55:59.868 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5001/api/DatabaseConfig - 200 null application/json; charset=utf-8 8.6184ms
+2026-02-26 17:55:59.872 +00:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Nl2Sql.Core.Entities.QueryHistory, Nl2Sql.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-02-26 17:55:59.872 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.QueryController.GetHistory (Nl2Sql.Api) in 5.9912ms
+2026-02-26 17:55:59.872 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.QueryController.GetHistory (Nl2Sql.Api)'
+2026-02-26 17:55:59.873 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5001/api/Query/history?limit=20 - 200 null application/json; charset=utf-8 7.1944ms
+2026-02-26 17:55:59.880 +00:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5001/api/Query/suggest - null null
+2026-02-26 17:55:59.880 +00:00 [INF] CORS policy execution successful.
+2026-02-26 17:55:59.880 +00:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5001/api/Query/suggest - 204 null null 0.2544ms
+2026-02-26 17:55:59.881 +00:00 [INF] Request starting HTTP/1.1 POST http://localhost:5001/api/Query/suggest - application/json 48
+2026-02-26 17:55:59.881 +00:00 [INF] CORS policy execution successful.
+2026-02-26 17:55:59.881 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api)'
+2026-02-26 17:55:59.881 +00:00 [INF] Route matched with {action = "SuggestQuestions", controller = "Query"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[System.String]]] SuggestQuestions(Nl2Sql.Core.Models.AiQueryRequest) on controller Nl2Sql.Api.Controllers.QueryController (Nl2Sql.Api).
+2026-02-26 17:55:59.884 +00:00 [INF] Start processing HTTP request POST https://api.anthropic.com/v1/messages
+2026-02-26 17:55:59.884 +00:00 [INF] Sending HTTP request POST https://api.anthropic.com/v1/messages
+2026-02-26 17:56:03.863 +00:00 [INF] Received HTTP response headers after 3978.1746ms - 200
+2026-02-26 17:56:03.863 +00:00 [INF] End processing HTTP request after 3978.4973ms - 200
+2026-02-26 17:56:03.863 +00:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-26 17:56:03.863 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api) in 3982.0688ms
+2026-02-26 17:56:03.863 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.QueryController.SuggestQuestions (Nl2Sql.Api)'
+2026-02-26 17:56:03.864 +00:00 [INF] Request finished HTTP/1.1 POST http://localhost:5001/api/Query/suggest - 200 null application/json; charset=utf-8 3982.5066ms
+2026-02-26 17:56:35.802 +00:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5001/api/Agent/ask - null null
+2026-02-26 17:56:35.803 +00:00 [INF] CORS policy execution successful.
+2026-02-26 17:56:35.805 +00:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5001/api/Agent/ask - 204 null null 3.0947ms
+2026-02-26 17:56:35.806 +00:00 [INF] Request starting HTTP/1.1 POST http://localhost:5001/api/Agent/ask - application/json 64
+2026-02-26 17:56:35.809 +00:00 [INF] CORS policy execution successful.
+2026-02-26 17:56:35.810 +00:00 [INF] Executing endpoint 'Nl2Sql.Api.Controllers.AgentController.Ask (Nl2Sql.Api)'
+2026-02-26 17:56:35.810 +00:00 [INF] Route matched with {action = "Ask", controller = "Agent"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Nl2Sql.Core.Models.AgentResponse]] Ask(Nl2Sql.Core.Models.AgentRequest) on controller Nl2Sql.Api.Controllers.AgentController (Nl2Sql.Api).
+2026-02-26 17:56:35.813 +00:00 [INF] Agent request: Show me monthly order trends (db: 1)
+2026-02-26 17:56:35.817 +00:00 [INF] Start processing HTTP request POST https://api.anthropic.com/v1/messages
+2026-02-26 17:56:35.817 +00:00 [INF] Sending HTTP request POST https://api.anthropic.com/v1/messages
+2026-02-26 17:56:37.926 +00:00 [INF] Received HTTP response headers after 2109.3578ms - 200
+2026-02-26 17:56:37.926 +00:00 [INF] End processing HTTP request after 2109.7066ms - 200
+2026-02-26 17:56:37.927 +00:00 [INF] Start processing HTTP request POST https://api.anthropic.com/v1/messages
+2026-02-26 17:56:37.927 +00:00 [INF] Sending HTTP request POST https://api.anthropic.com/v1/messages
+2026-02-26 17:56:42.615 +00:00 [INF] Received HTTP response headers after 4687.378ms - 200
+2026-02-26 17:56:42.615 +00:00 [INF] End processing HTTP request after 4687.6466ms - 200
+2026-02-26 17:56:42.636 +00:00 [INF] Start processing HTTP request POST https://api.anthropic.com/v1/messages
+2026-02-26 17:56:42.636 +00:00 [INF] Sending HTTP request POST https://api.anthropic.com/v1/messages
+2026-02-26 17:56:52.383 +00:00 [INF] Received HTTP response headers after 9746.6432ms - 200
+2026-02-26 17:56:52.383 +00:00 [INF] End processing HTTP request after 9746.927ms - 200
+2026-02-26 17:56:52.383 +00:00 [INF] Start processing HTTP request POST https://api.anthropic.com/v1/messages
+2026-02-26 17:56:52.383 +00:00 [INF] Sending HTTP request POST https://api.anthropic.com/v1/messages
+2026-02-26 17:56:57.195 +00:00 [INF] Received HTTP response headers after 4812.0104ms - 200
+2026-02-26 17:56:57.195 +00:00 [INF] End processing HTTP request after 4812.1925ms - 200
+2026-02-26 17:56:57.197 +00:00 [INF] Saved 1 entities to in-memory store.
+2026-02-26 17:56:57.197 +00:00 [INF] Executing OkObjectResult, writing value of type 'Nl2Sql.Core.Models.AgentResponse'.
+2026-02-26 17:56:57.202 +00:00 [INF] Executed action Nl2Sql.Api.Controllers.AgentController.Ask (Nl2Sql.Api) in 21391.3832ms
+2026-02-26 17:56:57.202 +00:00 [INF] Executed endpoint 'Nl2Sql.Api.Controllers.AgentController.Ask (Nl2Sql.Api)'
+2026-02-26 17:56:57.202 +00:00 [INF] Request finished HTTP/1.1 POST http://localhost:5001/api/Agent/ask - 200 null application/json; charset=utf-8 21396.1749ms
