@@ -327,7 +327,6 @@ function AgentMessage({ message, copiedId, onCopy }: {
     copiedId: string | null;
     onCopy: (text: string, id: string) => void;
 }) {
-    const [viewMode, setViewMode] = useState<'table' | 'chart'>('table');
     const [showSteps, setShowSteps] = useState(false);
     const [showMeta, setShowMeta] = useState(false);
 
@@ -459,11 +458,25 @@ function AgentMessage({ message, copiedId, onCopy }: {
                     </div>
                 )}
 
-                {/* Results */}
+                {/* Chart — shown automatically when agent recommends a visualization */}
+                {resp.results && resp.results.rowCount > 0 && hasChartVisualization(resp) && (
+                    <div className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+                        <div className="flex items-center gap-2 px-4 py-2.5 border-b border-gray-100 bg-gray-50/50 text-xs text-gray-500">
+                            <BarChart3 className="h-3.5 w-3.5 text-brand-500" />
+                            <span className="font-medium text-gray-700">{resp.visualization?.title || 'Visualization'}</span>
+                        </div>
+                        <div className="p-4">
+                            <ChartViewer result={resp.results} recommendation={resp.visualization} />
+                        </div>
+                    </div>
+                )}
+
+                {/* Data Table — always shown when there are results */}
                 {resp.results && resp.results.rowCount > 0 && (
                     <div className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
                         <div className="flex items-center justify-between px-4 py-2.5 border-b border-gray-100 bg-gray-50/50">
                             <div className="text-xs text-gray-500">
+                                <TableIcon className="h-3.5 w-3.5 inline mr-1 -mt-0.5 text-gray-400" />
                                 <span className="font-semibold text-gray-700">{resp.results.rowCount.toLocaleString()}</span> rows
                                 {resp.results.isTruncated && (
                                     <span className="text-amber-600 ml-1">(truncated from {resp.results.totalRowCount.toLocaleString()})</span>
@@ -471,27 +484,9 @@ function AgentMessage({ message, copiedId, onCopy }: {
                                 <span className="mx-1.5">·</span>
                                 <span>{resp.results.executionTimeMs}ms</span>
                             </div>
-                            <div className="flex bg-gray-100 rounded-lg p-0.5">
-                                <button onClick={() => setViewMode('table')}
-                                    className={cn("flex items-center gap-1 px-2.5 py-1 text-xs font-medium rounded-md transition-all",
-                                        viewMode === 'table' ? "bg-white shadow-sm text-gray-700" : "text-gray-500 hover:text-gray-700")}>
-                                    <TableIcon className="h-3 w-3" /> Table
-                                </button>
-                                <button onClick={() => setViewMode('chart')}
-                                    className={cn("flex items-center gap-1 px-2.5 py-1 text-xs font-medium rounded-md transition-all",
-                                        viewMode === 'chart' ? "bg-white shadow-sm text-gray-700" : "text-gray-500 hover:text-gray-700")}>
-                                    <BarChart3 className="h-3 w-3" /> Chart
-                                </button>
-                            </div>
                         </div>
-                        <div className="max-h-[500px] overflow-auto scrollbar-thin">
-                            {viewMode === 'table' ? (
-                                <ResultsTable result={resp.results} />
-                            ) : (
-                                <div className="p-4">
-                                    <ChartViewer result={resp.results} recommendation={resp.visualization} />
-                                </div>
-                            )}
+                        <div className="max-h-[400px] overflow-auto scrollbar-thin">
+                            <ResultsTable result={resp.results} />
                         </div>
                     </div>
                 )}
@@ -547,6 +542,21 @@ function AgentMessage({ message, copiedId, onCopy }: {
             </div>
         </div>
     );
+}
+
+/* ---------- Helpers ---------- */
+function hasChartVisualization(resp: AgentResponse): boolean {
+    const viz = resp.visualization;
+    if (!viz || !viz.chartType || viz.chartType === 'Table') return false;
+    if (!viz.xAxisColumn) return false;
+    const yCols = normalizeYAxisColumns(viz.yAxisColumns);
+    return yCols.length > 0;
+}
+
+function normalizeYAxisColumns(val: unknown): string[] {
+    if (Array.isArray(val)) return val.filter((s): s is string => typeof s === 'string' && s !== '');
+    if (typeof val === 'string' && val !== '') return [val];
+    return [];
 }
 
 /* ---------- Step Line ---------- */

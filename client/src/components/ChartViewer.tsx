@@ -20,9 +20,10 @@ export function ChartViewer({ result, recommendation }: ChartViewerProps) {
         if (!result.data.length) return null;
 
         if (recommendation && recommendation.chartType && recommendation.chartType !== 'Table') {
-            const yColumns = recommendation.yAxisColumns && recommendation.yAxisColumns.length > 0
-                ? recommendation.yAxisColumns
-                : [];
+            const rawY = recommendation.yAxisColumns;
+            const yColumns: string[] = Array.isArray(rawY)
+                ? rawY.filter((s): s is string => typeof s === 'string' && s !== '')
+                : (typeof rawY === 'string' && rawY !== '' ? [rawY] : []);
 
             const hasX = recommendation.xAxisColumn && result.columns.includes(recommendation.xAxisColumn);
             const hasY = yColumns.length > 0 && yColumns.every(col => result.columns.includes(col));

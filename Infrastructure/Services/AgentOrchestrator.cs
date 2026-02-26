@@ -314,9 +314,7 @@ public class AgentOrchestrator : IAgentService
             {
                 ChartType = vizProp.TryGetProperty("chartType", out var ct) ? ct.GetString() ?? "Table" : "Table",
                 XAxisColumn = vizProp.TryGetProperty("xAxisColumn", out var xa) ? xa.GetString() ?? "" : "",
-                YAxisColumns = vizProp.TryGetProperty("yAxisColumns", out var ya) && ya.ValueKind == JsonValueKind.Array
-                    ? ya.EnumerateArray().Select(e => e.GetString() ?? "").Where(s => s != "").ToList()
-                    : new List<string>(),
+                YAxisColumns = ParseYAxisColumns(vizProp),
                 Title = vizProp.TryGetProperty("title", out var t) ? t.GetString() ?? "" : ""
             };
         }
@@ -340,9 +338,27 @@ public class AgentOrchestrator : IAgentService
         ctx.Steps.Add(new AgentStep
         {
             Type = "presentation",
-            Description = $"Analysis complete with {ctx.Insights.Count} insight(s)",
+            Description = $"Analysis complete with {ctx.Insights.Count} insight(s) and {ctx.Visualization?.ChartType ?? "Table"} visualization",
             Success = true
         });
+    }
+
+    private static List<string> ParseYAxisColumns(JsonElement vizProp)
+    {
+        foreach (var propName in new[] { "yAxisColumns", "yAxisColumn" })
+        {
+            if (!vizProp.TryGetProperty(propName, out var val)) continue;
+
+            if (val.ValueKind == JsonValueKind.Array)
+                return val.EnumerateArray().Select(e => e.GetString() ?? "").Where(s => s != "").ToList();
+
+            if (val.ValueKind == JsonValueKind.String)
+            {
+                var s = val.GetString();
+                return string.IsNullOrEmpty(s) ? new List<string>() : new List<string> { s };
+            }
+        }
+        return new List<string>();
     }
 
     private async Task<JsonElement> CallClaude(string systemPrompt, object[] tools, List<object> messages)
